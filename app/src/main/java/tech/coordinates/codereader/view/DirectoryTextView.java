@@ -9,14 +9,13 @@ import android.widget.TextView;
 
 /**
  * Created by Administrator on 2016/9/13.
- *
  */
-public class FileTextView extends TextView {
+public class DirectoryTextView extends TextView {
     /**
      *默认画布颜色和画笔填充颜色
      */
     private static final int DEFAULT_CANVAS_COLOR = Color.WHITE;
-    private static final int DEFAULT_PAINT_COLOR = Color.BLUE;
+    private static final int DEFAULT_PAINT_COLOR = Color.RED;
     /**
      *默认半径大小,最好根据当前TextSize的大小来决定
      */
@@ -38,30 +37,42 @@ public class FileTextView extends TextView {
     private float radius;
 
     /**
+     *目录文件是否被打开
+     */
+    public boolean isOpened;
+
+    /**
      *current_path用于保存当前路径，便于找到子目录或者打开文件
      */
     private String currentPath = "";
 
-    public FileTextView(Context context, AttributeSet attrs){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR);
+
+    public DirectoryTextView(Context context, AttributeSet attrs){
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,false);
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR);
+    public DirectoryTextView(Context context, AttributeSet attrs,boolean isOpened){
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,isOpened);
     }
 
-    public void setPaint_color(int paint_color) {
-        this.paint_color = paint_color;
+    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color,boolean isOpened) {
+        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,isOpened);
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color) {
+
+
+    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, int paint_color,boolean isOpened) {
         super(context,attrs);
         this.fill_color = fill_color;
         this.paint_color = paint_color;
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
-
+        this.isOpened = isOpened;
         this.radius = (float) (getTextSize()*0.3);
+    }
+
+    public void setPaint_color(int paint_color) {
+        this.paint_color = paint_color;
     }
 
     public void setFill_color(int fill_color) {
@@ -80,7 +91,10 @@ public class FileTextView extends TextView {
         paint.setColor(paint_color);
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
-        canvas.drawCircle(tv_posX+20,tv_posY+40, radius,paint);
+        /**
+         * 设置左边圆圈的位置
+         */
+        canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius, radius,paint);
     }
 
     public int getFill_color() {

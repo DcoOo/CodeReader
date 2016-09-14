@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
-    <tech.coordinates.codereader.view.OpenedDirTextView
+    <tech.coordinates.codereader.view.DirectoryTextView
         android:id="@+id/file_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
