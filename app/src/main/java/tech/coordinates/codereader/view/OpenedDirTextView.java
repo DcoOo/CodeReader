@@ -1,0 +1,84 @@
+package tech.coordinates.codereader.view;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+/**
+ * Created by Administrator on 2016/9/13.
+ */
+public class OpenedDirTextView extends TextView {
+    //默认画布颜色和画笔填充颜色
+    private static final int DEFAULT_CANVAS_COLOR = Color.WHITE;
+    private static final int DEFAULT_PAINT_COLOR = Color.BLUE;
+    //默认半径大小,最好根据当前TextSize的大小来决定
+    private static final float DEFAULT_RADIUS = 10;
+
+    private Paint paint;
+    private Canvas canvas;
+
+    private int fill_color;
+    private int paint_color;
+    //当前TextView的坐标
+    private float tv_posX;
+    private float tv_posY;
+    //TextView左边圆半径,根据TextSize来决定
+    private float radis;
+
+    public OpenedDirTextView(Context context,AttributeSet attrs){
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR);
+    }
+
+    public OpenedDirTextView(Context context,AttributeSet attrs,int fill_color) {
+        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR);
+    }
+
+    public void setPaint_color(int paint_color) {
+        this.paint_color = paint_color;
+    }
+
+    public OpenedDirTextView(Context context, AttributeSet attrs, int fill_color, int paint_color) {
+        super(context,attrs);
+        this.fill_color = fill_color;
+        this.paint_color = paint_color;
+        this.tv_posX = this.getX();
+        this.tv_posY = this.getY();
+
+        this.radis = (float) (getTextSize()*0.3);
+    }
+
+    public void setFill_color(int fill_color) {
+        this.fill_color = fill_color;
+    }
+
+    public void setRadis(float radis) {
+        this.radis = radis;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        this.canvas = canvas;
+//        canvas.drawColor(fill_color);
+        paint = new Paint();
+        paint.setColor(paint_color);
+        paint.setStrokeWidth(1);
+        paint.setAntiAlias(true);
+        canvas.drawCircle(tv_posX+20,tv_posY+40,radis,paint);
+    }
+
+    public int getFill_color() {
+        return fill_color;
+    }
+
+    public int getPaint_color() {
+        return paint_color;
+    }
+
+    public float getRadis() {
+        return radis;
+    }
+}
