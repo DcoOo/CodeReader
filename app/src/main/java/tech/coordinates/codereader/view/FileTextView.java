@@ -50,6 +50,10 @@ public class FileTextView extends TextView {
         this(context,attrs,fill_color,DEFAULT_PAINT_COLOR);
     }
 
+    public String getCurrentPath() {
+        return currentPath;
+    }
+
     public void setPaint_color(int paint_color) {
         this.paint_color = paint_color;
     }

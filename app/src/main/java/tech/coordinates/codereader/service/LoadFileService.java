@@ -50,7 +50,7 @@ public class LoadFileService extends Service {
             try {
                 throw new FileNotFoundException();
             } catch (FileNotFoundException e) {
-                Log.d("exception",directory_path+": 不存在");
+                Log.d("exception",directory_path+":NOT EXISTS");
                 list_sub_files.add(FILE_NOT_FOUND);
                 return list_sub_files;
             }
@@ -60,6 +60,15 @@ public class LoadFileService extends Service {
          * 应该直接返回Path，因为我这里处理只是为了在点击目录时，展示其子目录和子文件
          * 只需要路径就够了，具体的打开文件操作由OpenFileService完成
          */
-        String[] files_name =
+        File[] files_name = dir_file.listFiles(new FileNameFilter());
+        if (files_name.length == 0){
+            list_sub_files.add(WITHOUT_CHILD_FILES);
+            return list_sub_files;
+        }
+        list_sub_files.add(WITH_CHILD_FILES);
+        for (File f : files_name){
+            list_sub_files.add(f.getPath());
+        }
+        return list_sub_files;
     }
 }
