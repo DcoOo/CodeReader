@@ -6,4 +6,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_setting">设置</string>
+    <string name="tv_search">搜索:</string>
+    <string name="btn_next">下一个</string>
 </resources>

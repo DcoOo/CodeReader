@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="btn_save_green">#3A5FCD</color>
+    <color name="btn_delete_red">#8B8B83</color>
 </resources>

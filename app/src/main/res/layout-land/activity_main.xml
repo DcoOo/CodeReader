@@ -33,29 +33,27 @@
             android:paddingBottom="5dp"
             android:orientation="horizontal"
             android:layout_weight="0.75">
-            <Button
-                android:id="@+id/btn_save"
+            <TextView
                 android:layout_width="0dp"
+                android:layout_weight="0.3"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/btn_save"/>
-            <Button
-                android:id="@+id/btn_commit"
+                android:text="@string/tv_search"
+                android:gravity="center_vertical|center_horizontal"/>
+            <EditText
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textAllCaps="false"
-                android:text="@string/btn_commit"/>
+                android:layout_height="match_parent" />
             <Button
-                android:id="@+id/btn_delete"
+                android:id="@+id/btn_setting"
                 android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/btn_delete"/>
+                android:text="@string/btn_next"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:layout_weight="4">
@@ -63,7 +61,37 @@
                 android:id="@+id/fm_file_content"
                 android:name="tech.coordinates.codereader.fragment.TextFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="0dp"
+                android:layout_weight="5"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="0.8">
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:padding="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/btn_delete_red"
+                    android:text="@string/btn_delete"/>
+                <Button
+                    android:id="@+id/btn_commit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:text="@string/btn_commit"/>
+
+                <Button
+                    android:background="@color/btn_save_green"
+                    android:id="@+id/btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_save"/>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
