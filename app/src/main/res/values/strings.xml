@@ -6,7 +6,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btn_setting">设置</string>
+    <string name="setting">设置</string>
     <string name="tv_search">搜索:</string>
     <string name="btn_next">下一个</string>
+    <string name="set_GitHub">设置GitHub账号信息</string>
+    <string name="account">账号:</string>
+    <string name="password">密码:</string>
+    <string name="repositories">仓库名称:</string>
+    <string name="test_git">测试Git</string>
+    <string name="test_sure_git">确认</string>
 </resources>

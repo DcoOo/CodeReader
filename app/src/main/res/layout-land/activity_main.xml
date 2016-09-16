@@ -85,7 +85,7 @@
                     android:text="@string/btn_commit"/>
 
                 <Button
-                    android:background="@color/btn_save_green"
+                    android:background="@color/blue"
                     android:id="@+id/btn_save"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

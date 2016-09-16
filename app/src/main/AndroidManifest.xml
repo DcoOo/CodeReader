@@ -9,6 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+        <!--设置横屏启动-->
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="landscape"

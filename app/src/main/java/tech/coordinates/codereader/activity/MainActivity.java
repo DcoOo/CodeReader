@@ -1,10 +1,13 @@
 package tech.coordinates.codereader.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import tech.coordinates.codereader.R;
@@ -12,34 +15,38 @@ import tech.coordinates.codereader.fragment.TextFragment;
 import tech.coordinates.codereader.view.DirectoryTextView;
 
 public class MainActivity extends AppCompatActivity implements TextFragment.OnFragmentInteractionListener{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        DirectoryTextView dirTV = (DirectoryTextView) findViewById(R.id.file_test);
-//        dirTV.isOpened = false;
-//        dirTV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //目录被打开
-//                if (!((DirectoryTextView)view).isOpened){
-//                    ((DirectoryTextView) view).isOpened = true;
-//                    ((DirectoryTextView) view).setPaint_color(Color.BLACK);
-//                    view.invalidate();
-//                    //列出当前目录下的所有子文件
-//                    Log.d("Debug","Directory open");
-//                }else {
-//                    ((DirectoryTextView) view).isOpened = false;
-//                    ((DirectoryTextView) view).setPaint_color(Color.parseColor("#FF34B3"));
-//                    view.invalidate();
-//                    Log.d("Debug","Directory close");
-//                }
-//            }
-//        });
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.menu_item_setting:
+                //点击设置时，切换到SettingActivity
+                Intent i = new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(i);
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
