@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -95,6 +96,7 @@ public class DirectoryTextView extends TextView {
          * 设置左边圆圈的位置
          */
         canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius, radius,paint);
+        Log.d("Debug","DIR: X:"+tv_posX+"Y:"+tv_posY);
     }
 
     public int getFill_color() {
