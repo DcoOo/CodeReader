@@ -19,20 +19,26 @@ import tech.coordinates.codereader.R;
  */
 public class TVLoadFileListener implements View.OnClickListener {
 
-    private static final int CODE_REQUEST_LOAD_FILE = 0;
+    public static final int CODE_REQUEST_LOAD_FILE = 0;
 
-    private EditText et_path;
     private View dialog;
     private Button btn_browse;
     private Activity activity_setting;
-    public TVLoadFileListener(Activity activity,View dialog){
+    private EditText et_path;
+
+    public TVLoadFileListener(Activity activity){
         this.activity_setting = activity;
-        this.dialog = dialog;
     }
+
+    public EditText getEt_path() {
+        return et_path;
+    }
+
     @Override
     public void onClick(View view) {
-        final View dialog = LayoutInflater.from(activity_setting).inflate(R.layout.dialog_load_file,null);
+        dialog = LayoutInflater.from(activity_setting).inflate(R.layout.dialog_load_file,null);
         et_path = (EditText) dialog.findViewById(R.id.et_dialog_load_path);
+
         btn_browse = (Button) dialog.findViewById(R.id.btn_dialog_browse);
         //点击浏览之后启动android系统的资源管理器，选中文件之后返回文件path
         btn_browse.setOnClickListener(new View.OnClickListener() {
@@ -44,16 +50,18 @@ public class TVLoadFileListener implements View.OnClickListener {
                 activity_setting.startActivityForResult(intent,CODE_REQUEST_LOAD_FILE);
             }
         });
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity_setting);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity_setting);
         builder.setTitle(R.string.load_file).setView(dialog).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //nothing
 
             }
         }).setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //点击确定之后按照ET中的path处理文件
+                //点击确定之后按照ET中的path处理文件，启动LoadFileService,修改UI
+                
             }
         }).show();
     }
