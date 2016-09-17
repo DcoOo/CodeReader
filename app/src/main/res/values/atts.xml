@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="Rules">
+    <declare-styleable name="MyRules">
         <attr name="rules_color" format="color"/>
     </declare-styleable>
 </resources>

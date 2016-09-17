@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.TextView;
 
 import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.fragment.TextFragment;

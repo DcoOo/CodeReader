@@ -14,5 +14,9 @@
     <string name="password">密码:</string>
     <string name="repositories">仓库名称:</string>
     <string name="test_git">测试Git</string>
-    <string name="test_sure_git">确认</string>
+    <string name="sure">确认</string>
+    <string name="load_file">载入文件</string>
+    <string name="directory">目录:</string>
+    <string name="browse">浏览</string>
+    <string name="cancel">取消</string>
 </resources>

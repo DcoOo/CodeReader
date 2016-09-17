@@ -36,6 +36,7 @@
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
+            android:gravity="center"
             android:text="@string/account"/>
         <EditText
             android:id="@+id/et_username"
@@ -54,6 +55,7 @@
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
+            android:gravity="center"
             android:text="@string/password"/>
         <EditText
             android:id="@+id/et_password"
@@ -96,11 +98,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:text="@string/test_sure_git"/>
+            android:text="@string/sure"/>
     </LinearLayout>
     <tech.coordinates.codereader.view.Rules
-        android:id="@+id/rules"
         rules:rules_color="@color/blue"
         android:layout_width="match_parent"
-        android:layout_height="2dp" />
+        android:layout_height="1dp" />
+    <TextView
+        android:id="@+id/tv_load_file"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:gravity=""
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/load_file"/>
+    <tech.coordinates.codereader.view.Rules
+        rules:rules_color="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 </LinearLayout>

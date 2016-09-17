@@ -40,11 +40,11 @@ public class Rules extends View {
         this.x = this.getPivotX();
         this.y = this.getPivotY();
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Rules);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MyRules);
         //设置默认值
-        color = ta.getColor(R.styleable.Rules_rules_color,Color.BLACK);
+        color = ta.getColor(R.styleable.MyRules_rules_color,Color.BLACK);
         ta.recycle();
-        ((Rules)findViewById(R.id.rules)).setColor(color);
+        setColor(color);
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -54,7 +54,7 @@ public class Rules extends View {
         paint.setAntiAlias(true);
         paint.setColor(color);
         paint.setStrokeWidth(100);
-        canvas.drawCircle(x,y,1000,paint);
+        canvas.drawCircle(x,y,3000,paint);
 //        drawRules(paint);
     }
 
