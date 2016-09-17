@@ -4,17 +4,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.annotation.MainThread;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
-import tech.coordinates.codereader.activity.MainActivity;
 import tech.coordinates.codereader.utility.FileNameFilter;
 
 public class LoadFileService extends Service {

@@ -1,4 +1,4 @@
-package tech.coordinates.codereader.utility;
+package tech.coordinates.codereader.listener;
 
 import android.view.View;
 

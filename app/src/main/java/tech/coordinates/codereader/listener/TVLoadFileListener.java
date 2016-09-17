@@ -1,7 +1,6 @@
-package tech.coordinates.codereader.utility;
+package tech.coordinates.codereader.listener;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -54,16 +53,9 @@ public class TVLoadFileListener implements View.OnClickListener {
         builder.setTitle(R.string.load_file).setView(dialog).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //nothing
-
+                //  nothing
             }
-        }).setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //点击确定之后按照ET中的path处理文件，启动LoadFileService,修改UI
-                
-            }
-        }).show();
+        }).setPositiveButton(R.string.sure, new DialogLoadFileListener(activity_setting)).show();
     }
 
 }
