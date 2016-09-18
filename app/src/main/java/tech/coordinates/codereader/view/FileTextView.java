@@ -1,6 +1,7 @@
 package tech.coordinates.codereader.view;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,8 +21,6 @@ public class FileTextView extends TextView {
     /**
      *默认半径大小,最好根据当前TextSize的大小来决定
      */
-    private static final float DEFAULT_RADIUS = 10;
-
     private Paint paint;
     private Canvas canvas;
 
@@ -36,6 +35,10 @@ public class FileTextView extends TextView {
      *TextView左边圆半径,根据TextSize来决定
      */
     private float radius;
+
+    public void setCurrentPath(String currentPath) {
+        this.currentPath = currentPath;
+    }
 
     /**
      *current_path用于保存当前路径，便于找到子目录或者打开文件
@@ -65,7 +68,6 @@ public class FileTextView extends TextView {
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
 
-        this.radius = (float) (getTextSize()*0.3);
     }
 
     public void setFill_color(int fill_color) {
@@ -84,7 +86,8 @@ public class FileTextView extends TextView {
         paint.setColor(paint_color);
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
-        canvas.drawCircle(tv_posX+20,tv_posY+40, radius,paint);
+        this.radius = (float) (getTextSize()*0.3);
+        canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius,radius,paint);
     }
 
     public int getFill_color() {

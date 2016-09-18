@@ -56,7 +56,16 @@ public class DirectoryTextView extends TextView {
         this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,isOpened);
     }
 
-    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color,boolean isOpened) {
+    public void setCurrentPath(String currentPath) {
+        this.currentPath = currentPath;
+    }
+
+    public String getCurrentPath() {
+
+        return currentPath;
+    }
+
+    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, boolean isOpened) {
         this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,isOpened);
     }
 
@@ -69,7 +78,6 @@ public class DirectoryTextView extends TextView {
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
         this.isOpened = isOpened;
-        this.radius = (float) (getTextSize()*0.3);
     }
 
     public void setPaint_color(int paint_color) {
@@ -95,8 +103,8 @@ public class DirectoryTextView extends TextView {
         /**
          * 设置左边圆圈的位置
          */
+        this.radius = (float) (getTextSize()*0.3);
         canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius, radius,paint);
-        Log.d("Debug","DIR: X:"+tv_posX+"Y:"+tv_posY);
     }
 
     public int getFill_color() {

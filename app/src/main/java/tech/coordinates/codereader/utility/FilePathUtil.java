@@ -9,6 +9,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
+
+import java.util.LinkedList;
 
 /**
  * Created by Administrator on 2016/9/17.
@@ -127,5 +130,20 @@ public class FilePathUtil {
             cursor.moveToNext();
         }
         return id;
+    }
+
+    /**
+     * Get file name by path
+     *
+     * @param path
+     * @return
+     */
+    public static String getItemNameByPath(String path, boolean file) {
+        String[] str_array_path_list;
+        if (path != null && !path.equals("")) {
+            str_array_path_list = path.split("/");
+            return str_array_path_list[str_array_path_list.length - 1];
+        }
+        return null;
     }
 }

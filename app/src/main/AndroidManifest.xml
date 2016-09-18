@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--设置横屏启动-->
         <activity
             android:name=".activity.MainActivity">
             <intent-filter>
@@ -20,7 +19,6 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ReadActivity"
             android:screenOrientation="landscape"/>
-
         <service
             android:name=".service.LoadFileService"
             android:enabled="true"

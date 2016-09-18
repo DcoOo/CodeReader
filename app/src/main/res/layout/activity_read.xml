@@ -11,8 +11,8 @@
         android:layout_weight="2"
         android:layout_height="match_parent">
         <fragment
+            android:id="@+id/fm_items_tree"
             android:name="tech.coordinates.codereader.fragment.TreeFragment"
-            android:id="@+id/fm_directory_tree"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
