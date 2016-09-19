@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tech.coordinates.codereader">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".activity.MainActivity">
+        android:theme="@style/Theme.AppCompat.Light"
+        >
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.ReadActivity"
-            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.TestActivity" >
+
+        </activity>
+        <activity
+            android:name=".activity.ReadActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <service
             android:name=".service.LoadFileService"
             android:enabled="true"
@@ -42,7 +50,11 @@
         <service
             android:name=".service.SearchService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+        <service
+            android:name=".service.TestService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

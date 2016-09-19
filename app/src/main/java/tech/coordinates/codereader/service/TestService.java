@@ -10,36 +10,35 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 
 import tech.coordinates.codereader.utility.MyBinder;
 
-public class OpenFileService extends Service {
+public class TestService extends Service {
 
     private static final String READ_FILE_OK = "200";
     private static final String OPEN_FILE_FAILED = "0";
 
-    private OpenFileBinder openFileBinder = new OpenFileBinder();
+    private TestBinder testBinder = new TestBinder();
 
     private RandomAccessFile random_file_read;
 
-    public OpenFileService() {
+    public TestService() {
 
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return openFileBinder;
+        return testBinder;
     }
 
-    public class OpenFileBinder extends Binder{
+    public class TestBinder extends Binder{
 
-//        protected OpenFileBinder(Service service) {
+        //        protected OpenFileBinder(Service service) {
 //            super(service);
 //        }
         public Service getService(){
-            return OpenFileService.this;
+            return TestService.this;
         }
     }
 
@@ -52,7 +51,6 @@ public class OpenFileService extends Service {
     public String[] getFileContent(String file_path){
         String[] content = new String[2];
         random_file_read = null;
-        //可以添加设置文件编码的功能CharSet实现
         StringBuilder str_builder = new StringBuilder("");
         try {
             random_file_read = new RandomAccessFile(file_path,"r");
@@ -64,7 +62,6 @@ public class OpenFileService extends Service {
         }
         FileChannel channel_file = random_file_read.getChannel();
         ByteBuffer buffer_byte = ByteBuffer.allocate(64);
-        CharBuffer buffer_char = CharBuffer.allocate(32);
         int bytesRead = 0;
         try {
             bytesRead = channel_file.read(buffer_byte);
@@ -72,21 +69,7 @@ public class OpenFileService extends Service {
             e.printStackTrace();
         }
         while (bytesRead != -1) {
-            buffer_byte.flip();
-            while (buffer_byte.hasRemaining()){
-                str_builder.append((char) buffer_byte.get());
-            }
-            buffer_byte.clear();
-            try {
-                bytesRead = channel_file.read(buffer_byte);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            channel_file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            str_builder.append((char) buffer_byte.get());
         }
         content[0] = READ_FILE_OK;
         content[1] = str_builder.toString();

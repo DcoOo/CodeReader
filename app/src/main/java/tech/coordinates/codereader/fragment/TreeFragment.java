@@ -38,7 +38,6 @@ public class TreeFragment extends Fragment {
      * 添加进该Fragment的每个View的监听器
      */
     private View.OnClickListener file_listener;
-
     private Bundle bundle_data_from_read_activity;
 
     public void setBundle_data_from_read_activity(Bundle bundle_data_from_read_activity) {
@@ -64,7 +63,7 @@ public class TreeFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        file_listener = new OnFileItemClicked();
+        file_listener = new OnFileItemClicked(this.getContext());
         return view;
     }
 
