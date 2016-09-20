@@ -28,6 +28,7 @@ import tech.coordinates.codereader.view.FileTextView;
  * 当点击文件，在TextFragment加载内容
  */
 public class TreeFragment extends Fragment {
+
     private static final int FILE_COLOR = Color.BLUE;
     private static final int DIRECTORY_UNOPENED_COLOR = Color.GREEN;
     private static final int DIRECTORY_OPENED_COLOR = Color.BLACK;

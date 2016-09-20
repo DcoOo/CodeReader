@@ -1,28 +1,29 @@
 package tech.coordinates.codereader.fragment;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import tech.coordinates.codereader.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TextFragment.OnFragmentInteractionListener} interface
+ * {@link ContentFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TextFragment#newInstance} factory method to
+ * Use the {@link ContentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TextFragment extends Fragment {
+public class ContentFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "content";
+//    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -30,7 +31,7 @@ public class TextFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TextFragment() {
+    public ContentFragment() {
         // Required empty public constructor
     }
 
@@ -39,15 +40,14 @@ public class TextFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TextFragment.
+     * @return A new instance of fragment ContentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TextFragment newInstance(String param1, String param2) {
-        TextFragment fragment = new TextFragment();
+    public static ContentFragment newInstance(String param1) {
+        ContentFragment fragment = new ContentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +57,7 @@ public class TextFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -65,22 +65,15 @@ public class TextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_text, container, false);
+        View view = inflater.inflate(R.layout.fragment_content, container, false);
+        ((TextView)view.findViewById(R.id.test_tv)).setText(mParam1);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
         }
     }
 

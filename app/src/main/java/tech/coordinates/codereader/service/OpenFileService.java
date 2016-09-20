@@ -17,11 +17,10 @@ import tech.coordinates.codereader.utility.MyBinder;
 
 public class OpenFileService extends Service {
 
-    private static final String READ_FILE_OK = "200";
-    private static final String OPEN_FILE_FAILED = "0";
+    public static final String READ_FILE_OK = "200";
+    public static final String OPEN_FILE_FAILED = "0";
 
     private OpenFileBinder openFileBinder = new OpenFileBinder();
-
     private RandomAccessFile random_file_read;
 
     public OpenFileService() {

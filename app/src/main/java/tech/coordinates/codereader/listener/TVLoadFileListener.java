@@ -23,13 +23,13 @@ public class TVLoadFileListener implements View.OnClickListener {
     private View dialog;
     private Button btn_browse;
     private Activity activity_setting;
-    private EditText et_path;
+    private static EditText et_path;
 
     public TVLoadFileListener(Activity activity){
         this.activity_setting = activity;
     }
 
-    public EditText getEt_path() {
+    public static EditText getEt_path() {
         return et_path;
     }
 
@@ -40,15 +40,16 @@ public class TVLoadFileListener implements View.OnClickListener {
 
         btn_browse = (Button) dialog.findViewById(R.id.btn_dialog_browse);
         //点击浏览之后启动android系统的资源管理器，选中文件之后返回文件path
-        btn_browse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                activity_setting.startActivityForResult(intent,CODE_REQUEST_LOAD_FILE);
-            }
-        });
+//        btn_browse.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                intent.setType("*/*");
+//                activity_setting.startActivityForResult(intent,CODE_REQUEST_LOAD_FILE);
+//            }
+//        });
+        btn_browse.setOnClickListener(new OnBrowseClicked(activity_setting));
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity_setting);
         builder.setTitle(R.string.load_file).setView(dialog).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override

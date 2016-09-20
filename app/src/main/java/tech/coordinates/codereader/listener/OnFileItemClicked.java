@@ -1,17 +1,21 @@
 package tech.coordinates.codereader.listener;
 
-import android.app.Service;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
+import tech.coordinates.codereader.R;
+import tech.coordinates.codereader.activity.ReadActivity;
+import tech.coordinates.codereader.fragment.ContentFragment;
 import tech.coordinates.codereader.service.OpenFileService;
-import tech.coordinates.codereader.utility.ServicesManager;
 import tech.coordinates.codereader.view.FileTextView;
 
 /**
@@ -19,19 +23,33 @@ import tech.coordinates.codereader.view.FileTextView;
  */
 public class OnFileItemClicked implements View.OnClickListener {
 
+
+    //该service为了传递类型
+    private static OpenFileService open_file_service = new OpenFileService();
+    private static ServiceConnection conn;
+
     private Context context;
     private String[] str_content;
-    //该service为了传递类型
-    private OpenFileService open_file_service = new OpenFileService();
-    private ServicesManager services_manager;
+    private Handler handler_main;
+    private String content;
+    private Fragment fragment_content;
     public OnFileItemClicked(Context context){
         this.context = context;
-//        Log.d("Debug",open_file_service == null?"OnFileItemClicked Null":"OnFileItemClicked Not null");
-//        ServicesManager.getServicesManager(context);
-//        ServicesManager.bindService(open_file_service);
     }
     public boolean isFile = false;
 
+    static{
+        conn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                open_file_service = (OpenFileService) ((OpenFileService.OpenFileBinder) service).getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+            }
+        };
+    }
     /**
      * 此处为点击目录树中的文件的响应事件
      * 1.文件 启动OpenFileService，调用getFileContent(String file_path)方法
@@ -41,30 +59,26 @@ public class OnFileItemClicked implements View.OnClickListener {
     @Override
     public void onClick(final View v) {
         if (isFile){
-            getOpenFileService(((FileTextView)v).getCurrentPath());
-        }
-    }
-
-    private void getOpenFileService(final String path){
-        ServiceConnection conn = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                open_file_service = (OpenFileService) ((OpenFileService.OpenFileBinder) service).getService();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("Debug",open_file_service.getFileContent(path)[1]);
+            final String path = ((FileTextView)v).getCurrentPath();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    str_content = open_file_service.getFileContent(path);
+                    Log.d("Debug",str_content[0]);
+                    if (str_content[0].equals(OpenFileService.READ_FILE_OK)){
+                        //向主线程发送数据
+                        Looper.prepare();
+                        handler_main = ReadActivity.getHandler_main();
+                        Message msg = handler_main.obtainMessage();
+                        msg.obj = str_content[1];
+                        Log.d("Debug","Listener"+str_content[1]);
+                        handler_main.sendMessage(msg);
+                        Looper.loop();
                     }
-                }).start();
-            }
 
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-            }
-        };
-        Intent i = new Intent(context,OpenFileService.class);
-        context.bindService(i,conn,Service.BIND_AUTO_CREATE);
+                }
+            }).start();
+        }
     }
 
 }

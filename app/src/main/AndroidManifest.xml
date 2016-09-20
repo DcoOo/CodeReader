@@ -9,8 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light"
-        >
+        android:theme="@style/Theme.AppCompat.Light">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,13 +18,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.TestActivity" >
+        <activity android:name=".activity.TestActivity">
 
         </activity>
         <activity
             android:name=".activity.ReadActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <service
             android:name=".service.LoadFileService"

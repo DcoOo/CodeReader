@@ -79,7 +79,7 @@
             android:layout_weight="4">
             <fragment
                 android:id="@+id/fm_file_content"
-                android:name="tech.coordinates.codereader.fragment.TextFragment"
+                android:name="tech.coordinates.codereader.fragment.ContentFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"/>

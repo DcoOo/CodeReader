@@ -11,12 +11,20 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/9/17.
  */
 public class FilePathUtil {
+
+    public static final String FILE = "1";
+    public static final String DIRECTORY = "0";
+
     public static String getPathByUri4kitkat(final Context context, final Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         // DocumentProvider
@@ -85,6 +93,33 @@ public class FilePathUtil {
         }
         return null;
     }
+
+    private static File[] getFileList(File file){
+        if (file.isDirectory()){
+            if (file.listFiles() != null){
+                return file.listFiles();
+            }
+            return null;
+        }
+        return null;
+    }
+    public static  List<Map<String,String>> getTargetDir(String path){
+        List<Map<String,String>> data = new LinkedList<>();
+        File[] files = FilePathUtil.getFileList(new File(path));
+        Map<String,String> map_file;
+        if (files != null){
+            for (File f : files){
+                map_file = new HashMap<>();
+                map_file.put("path",f.getPath());
+                map_file.put("name",f.getName());
+                map_file.put("isFile",f.isFile()?FILE:DIRECTORY);
+                data.add(map_file);
+            }
+            return data;
+        }
+        return null;
+    }
+
 
     /**
      * @param uri The Uri to check.
