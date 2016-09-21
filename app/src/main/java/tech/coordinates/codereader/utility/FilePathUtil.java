@@ -94,7 +94,7 @@ public class FilePathUtil {
         return null;
     }
 
-    private static File[] getFileList(File file){
+    public static File[] getFileList(File file){
         if (file.isDirectory()){
             if (file.listFiles() != null){
                 return file.listFiles();
@@ -118,6 +118,23 @@ public class FilePathUtil {
             return data;
         }
         return null;
+    }
+
+    public static int getNumberOfFlow(String root_path,String current_path){
+        int numberofflow = 0;
+        int count1 = 0;
+        int count2 = 0;
+        for (char c : root_path.toCharArray()){
+            if (c == '/'){
+                count1++;
+            }
+        }
+        for (char c : current_path.toCharArray()){
+            if (c == '/'){
+                count2++;
+            }
+        }
+        return count1-count2;
     }
 
 
@@ -173,7 +190,7 @@ public class FilePathUtil {
      * @param path
      * @return
      */
-    public static String getItemNameByPath(String path, boolean file) {
+    public static String getItemNameByPath(String path) {
         String[] str_array_path_list;
         if (path != null && !path.equals("")) {
             str_array_path_list = path.split("/");

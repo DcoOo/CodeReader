@@ -30,24 +30,42 @@ import tech.coordinates.codereader.view.FileTextView;
  */
 public class TreeFragment extends Fragment {
 
-    private static final int FILE_COLOR = Color.BLUE;
-    private static final int DIRECTORY_UNOPENED_COLOR = Color.GREEN;
-    private static final int DIRECTORY_OPENED_COLOR = Color.BLACK;
+    public static final int FILE_COLOR = Color.BLUE;
+    public static final int DIRECTORY_UNOPENED_COLOR = Color.GREEN;
+    public static final int DIRECTORY_OPENED_COLOR = Color.BLACK;
 
-    private TextView tv_file;
-    private LinearLayout ll_items_tree_main;
+    public static TextView getTv_root() {
+        return tv_root;
+    }
+
+    private static TextView tv_root;
+    private static LinearLayout ll_items_tree_main;
     /**
      * 添加进该Fragment的每个View的监听器
      */
     private View.OnClickListener file_listener;
     private Bundle bundle_data_from_read_activity;
+    private TextView tv_file;
 
     public void setBundle_data_from_read_activity(Bundle bundle_data_from_read_activity) {
         this.bundle_data_from_read_activity = bundle_data_from_read_activity;
     }
 
-    private String str_root_item_path = null;
-    private String str_root_item_name = null;
+    public static LinearLayout getTreeLinearLayout() {
+        return ll_items_tree_main;
+    }
+
+    private static String str_root_item_path = null;
+
+    public static String getStr_root_item_path() {
+        return str_root_item_path;
+    }
+
+    public static String getStr_root_item_name() {
+        return str_root_item_name;
+    }
+
+    private static String str_root_item_name = null;
 
     //在创建目录树的过程中使用
     private FileTextView ftv_file;
@@ -76,17 +94,18 @@ public class TreeFragment extends Fragment {
             str_root_item_path = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_PATH);
             str_root_item_name = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_NAME);
         }
+        tv_root = (TextView) addView(str_root_item_path,str_root_item_name,new File(str_root_item_path));
         ll_items_tree_main.addView(addView(str_root_item_path,str_root_item_name,new File(str_root_item_path)));
     }
 
-    private View addView(String path, String name, File file){
+    public View addView(String path, String name, File file){
         if (file.isFile()){
             tv_file = new FileTextView(this.getContext(),null,FILE_COLOR);
             ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
                     (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             tv_file.setLayoutParams(params_ftv);
-            tv_file.setText("    "+name);
-            ((FileTextView)tv_file).setCurrentPath(path);
+            tv_file.append(name);
+            ((FileTextView) tv_file).setCurrentPath(path);
             if (file_listener == null){
                 Log.d("Debug","Listener is null");
             }
@@ -100,12 +119,12 @@ public class TreeFragment extends Fragment {
                     (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             tv_file.setLayoutParams(params_ftv);
             tv_file.setText("    "+name);
-            ((DirectoryTextView)tv_file).setCurrentPath(path);
+            ((DirectoryTextView) tv_file).setCurrentPath(path);
             if (file_listener == null){
                 Log.d("Debug","Listener is null");
             }
             //Add Listener
-            tv_file.setOnClickListener(new OnDirectoryItemClicked());
+            tv_file.setOnClickListener(new OnDirectoryItemClicked(TreeFragment.this));
         }
         //在该方法体中还应该为每一个View添加监听事件
 

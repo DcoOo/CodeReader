@@ -26,6 +26,11 @@ public class FileTextView extends TextView {
 
     private int fill_color;
     private int paint_color;
+
+    /**
+     * 用于记录该文件是第几级目录
+     */
+    private int int_numberofflower;
     /**
      *当前TextView的坐标
      */
@@ -45,12 +50,12 @@ public class FileTextView extends TextView {
      */
     private String currentPath = "";
 
-    public FileTextView(Context context, AttributeSet attrs){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR);
+    public FileTextView(Context context, AttributeSet attrs,int numberofflower){
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,numberofflower);
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR);
+    public FileTextView(Context context, AttributeSet attrs, int fill_color,int numberofflower) {
+        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,numberofflower);
     }
 
     public String getCurrentPath() {
@@ -61,13 +66,13 @@ public class FileTextView extends TextView {
         this.paint_color = paint_color;
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color) {
+    public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color, int int_numberofflower) {
         super(context,attrs);
         this.fill_color = fill_color;
         this.paint_color = paint_color;
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
-
+        this.int_numberofflower = int_numberofflower;
     }
 
     public void setFill_color(int fill_color) {
@@ -88,6 +93,7 @@ public class FileTextView extends TextView {
         paint.setAntiAlias(true);
         this.radius = (float) (getTextSize()*0.3);
         canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius,radius,paint);
+
     }
 
     public int getFill_color() {
