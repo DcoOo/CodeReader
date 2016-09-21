@@ -84,7 +84,6 @@ public class ReadActivity extends AppCompatActivity implements
                 file_content = (String) msg.obj;
                 Log.d("Debug","Main handler"+file_content);
                 showInTextFragment();
-
             }
         };
     }

@@ -90,7 +90,7 @@ public class SettingActivity extends AppCompatActivity {
         String path = ((TextView)view.findViewById(R.id.tv_item_path)).getText().toString();
         DialogLoadFileListener.setStr_item_name(name);
         DialogLoadFileListener.setStr_item_path(path);
-        et_path = listener.getEt_path();
+        et_path = TVLoadFileListener.getEt_path();
         et_path.setText("");
         et_path.setText(path);
     }

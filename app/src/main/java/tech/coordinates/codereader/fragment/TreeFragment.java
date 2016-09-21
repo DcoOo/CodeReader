@@ -16,6 +16,7 @@ import java.io.File;
 import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.activity.ReadActivity;
 import tech.coordinates.codereader.exception.LayoutNotFoundException;
+import tech.coordinates.codereader.listener.OnDirectoryItemClicked;
 import tech.coordinates.codereader.listener.OnFileItemClicked;
 import tech.coordinates.codereader.view.DirectoryTextView;
 import tech.coordinates.codereader.view.FileTextView;
@@ -92,6 +93,19 @@ public class TreeFragment extends Fragment {
             ((OnFileItemClicked)file_listener).isFile = true;
             tv_file.setOnClickListener(file_listener);
             //啊！！！！！！！！！以后一定先设计好 改好麻烦 - -   一定要多一个父类
+        }else {
+            //Directory Into
+            tv_file = new DirectoryTextView(this.getContext(),null,DIRECTORY_UNOPENED_COLOR,false);
+            ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
+                    (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            tv_file.setLayoutParams(params_ftv);
+            tv_file.setText("    "+name);
+            ((DirectoryTextView)tv_file).setCurrentPath(path);
+            if (file_listener == null){
+                Log.d("Debug","Listener is null");
+            }
+            //Add Listener
+            tv_file.setOnClickListener(new OnDirectoryItemClicked());
         }
         //在该方法体中还应该为每一个View添加监听事件
 
