@@ -34,6 +34,9 @@ public class TreeFragment extends Fragment {
     public static final int DIRECTORY_UNOPENED_COLOR = Color.GREEN;
     public static final int DIRECTORY_OPENED_COLOR = Color.BLACK;
 
+    private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
+            (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
     public static TextView getTv_root() {
         return tv_root;
     }
@@ -95,29 +98,25 @@ public class TreeFragment extends Fragment {
             str_root_item_name = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_NAME);
         }
         Log.d("Debug","TreeFragment onActivityCreated");
-        tv_root = (TextView) addView(str_root_item_path,str_root_item_name,new File(str_root_item_path));
-        ll_items_tree_main.addView(addView(str_root_item_path,str_root_item_name,new File(str_root_item_path)));
+        tv_root = (TextView) addView(str_root_item_name,new File(str_root_item_path));
+        ll_items_tree_main.addView(tv_file);
     }
 
-    public View addView(String path, String name, File file){
+    public View addView(String name, File file){
         if (file.isFile()){
             tv_file = new FileTextView(this.getContext(),null,FILE_COLOR);
-            ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-                    (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             tv_file.setLayoutParams(params_ftv);
             tv_file.append(name);
-            ((FileTextView) tv_file).setCurrentPath(path);
+            ((FileTextView) tv_file).setCurrentPath(file.getPath());
             ((OnFileItemClicked)file_listener).isFile = true;
             tv_file.setOnClickListener(file_listener);
             //啊！！！！！！！！！以后一定先设计好 改好麻烦 - -   一定要多一个父类
         }else {
             //Directory Into
             tv_file = new DirectoryTextView(this.getContext(),null,DIRECTORY_UNOPENED_COLOR,false);
-            ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-                    (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             tv_file.setLayoutParams(params_ftv);
             tv_file.setText("    "+name);
-            ((DirectoryTextView) tv_file).setCurrentPath(path);
+            ((DirectoryTextView) tv_file).setCurrentPath(file.getPath());
             //Add Listener
             tv_file.setOnClickListener(new OnDirectoryItemClicked(TreeFragment.this));
         }

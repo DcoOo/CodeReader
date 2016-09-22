@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -34,52 +36,41 @@ import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.listener.ListViewFilesOnClickListener;
 import tech.coordinates.codereader.service.TestService;
 import tech.coordinates.codereader.utility.FilePathUtil;
+import tech.coordinates.codereader.view.DirectoryTextView;
 
 /**
  * Created by Administrator on 2016/9/18.
  */
-public class TestActivity extends AppCompatActivity{
-    private MenuItem menuItem;
+public class TestActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private LinearLayout ll_main;
+    private DirectoryTextView dtv;
+    private int i = 0;
+    private LinearLayout ll;
+    private DirectoryTextView dtv_root;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
-        Button btn = (Button) findViewById(R.id.btn_show_files);
-        registerForContextMenu(btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(TestActivity.this);
-                AlertDialog.Builder dialog;
-                View view = getLayoutInflater().inflate(R.layout.dialog_load_file,null);
-                Button btn = (Button) view.findViewById(R.id.btn_dialog_browse);
-                TestActivity.this.registerForContextMenu(btn);
-                dialog = builder.setView(view);
-                dialog.show();
-            }
-        });
+        ll_main = (LinearLayout) findViewById(R.id.ll_main);
+        dtv_root = (DirectoryTextView) findViewById(R.id.dtv_dir);
+        dtv_root.setOnClickListener(this);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-//        getMenuInflater().inflate(R.menu.menu_context_dir,menu);
-        MenuItem item1 = menu.add(1,1,1,"选择文件夹");
-        item1.setOnMenuItemClickListener(new MyOnMenuItemClicked());
+    public void onClick(View v) {
+        showChildDirectry(v,"child1");
+        showChildDirectry(v,"child2");
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        Log.d("Debug","Here!!");
-        return super.onContextItemSelected(item);
-    }
-
-    class MyOnMenuItemClicked implements MenuItem.OnMenuItemClickListener{
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            Log.d("Debug","Here!!!!");
-            return false;
-        }
+    public void showChildDirectry(View parent,String name){
+        ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ((LinearLayout)parent.getParent()).addView(ll);
+        dtv = new DirectoryTextView(this,null);
+        dtv.setText("    "+name);
+        dtv.setOnClickListener(this);
+        ll.addView(dtv);
     }
 }
