@@ -7,9 +7,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="显示文件"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        android:layout_below="@+id/btn_show_files" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_show_files">
+
+    </RelativeLayout>
+
 </RelativeLayout>

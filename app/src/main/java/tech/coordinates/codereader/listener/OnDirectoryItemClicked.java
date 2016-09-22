@@ -19,12 +19,13 @@ import tech.coordinates.codereader.view.FileTextView;
  * Created by Administrator on 2016/9/21.
  */
 public class OnDirectoryItemClicked implements View.OnClickListener {
-
-    private static LinearLayout ll_tree_main = TreeFragment.getTreeLinearLayout();
+    //不要随便的定义static变量！！！！！！！！！！
+    private LinearLayout ll_tree_main;
     private TreeFragment fragment;
 
     public OnDirectoryItemClicked(TreeFragment fragment){
         this.fragment = fragment;
+        ll_tree_main = TreeFragment.getTreeLinearLayout();
     }
 
     @Override
@@ -35,7 +36,7 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
             ((DirectoryTextView) v).setPaint_color(TreeFragment.DIRECTORY_UNOPENED_COLOR);
             v.invalidate();
             //删除当前目录下的所有子文件
-            Log.d("Debug", "Directory open");
+            Log.d("Debug", "Directory close");
         }else {
             //目前是未打开状态，再次点击时打开directory，然后显示其子孩子
             ((DirectoryTextView) v).isOpened = true;
@@ -50,13 +51,14 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
 
     private void addChildFiles(View view){
         File[] files = FilePathUtil.getFileList(new File(((DirectoryTextView)view).getCurrentPath()));
+        Log.d("Debug","List Files");
         if (files == null){
             return ;
         }
         for (File f : files){
             String path = f.getPath();
             ll_tree_main.addView(fragment.addView(path,FilePathUtil.getItemNameByPath(path),f));
-
         }
+
     }
 }

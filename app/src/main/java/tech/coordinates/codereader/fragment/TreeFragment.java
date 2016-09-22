@@ -70,11 +70,11 @@ public class TreeFragment extends Fragment {
     //在创建目录树的过程中使用
     private FileTextView ftv_file;
     private DirectoryTextView dtv_directory;
-
+    private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tree,container,false);
+        view = inflater.inflate(R.layout.fragment_tree,container,false);
         ll_items_tree_main = (LinearLayout) view.findViewById(R.id.ll_fm_tree_main);
         if (ll_items_tree_main == null){
             try {
@@ -94,6 +94,7 @@ public class TreeFragment extends Fragment {
             str_root_item_path = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_PATH);
             str_root_item_name = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_NAME);
         }
+        Log.d("Debug","TreeFragment onActivityCreated");
         tv_root = (TextView) addView(str_root_item_path,str_root_item_name,new File(str_root_item_path));
         ll_items_tree_main.addView(addView(str_root_item_path,str_root_item_name,new File(str_root_item_path)));
     }
@@ -106,9 +107,6 @@ public class TreeFragment extends Fragment {
             tv_file.setLayoutParams(params_ftv);
             tv_file.append(name);
             ((FileTextView) tv_file).setCurrentPath(path);
-            if (file_listener == null){
-                Log.d("Debug","Listener is null");
-            }
             ((OnFileItemClicked)file_listener).isFile = true;
             tv_file.setOnClickListener(file_listener);
             //啊！！！！！！！！！以后一定先设计好 改好麻烦 - -   一定要多一个父类
@@ -120,14 +118,10 @@ public class TreeFragment extends Fragment {
             tv_file.setLayoutParams(params_ftv);
             tv_file.setText("    "+name);
             ((DirectoryTextView) tv_file).setCurrentPath(path);
-            if (file_listener == null){
-                Log.d("Debug","Listener is null");
-            }
             //Add Listener
             tv_file.setOnClickListener(new OnDirectoryItemClicked(TreeFragment.this));
         }
         //在该方法体中还应该为每一个View添加监听事件
-
         return tv_file;
     }
 
