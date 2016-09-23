@@ -1,7 +1,6 @@
 package tech.coordinates.codereader.view;
 
 import android.content.Context;
-import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -30,7 +29,7 @@ public class FileTextView extends TextView {
     /**
      * 用于记录该文件是第几级目录
      */
-    private int int_numberofflower;
+    private int stages;
     /**
      *当前TextView的坐标
      */
@@ -50,12 +49,12 @@ public class FileTextView extends TextView {
      */
     private String currentPath = "";
 
-    public FileTextView(Context context, AttributeSet attrs,int numberofflower){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,numberofflower);
+    public FileTextView(Context context, AttributeSet attrs,int stages){
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,stages);
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color,int numberofflower) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,numberofflower);
+    public FileTextView(Context context, AttributeSet attrs, int fill_color,int stages) {
+        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,stages);
     }
 
     public String getCurrentPath() {
@@ -66,13 +65,18 @@ public class FileTextView extends TextView {
         this.paint_color = paint_color;
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color, int int_numberofflower) {
+    public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color, int stages) {
         super(context,attrs);
+        String str_def = "";
+        for (int i = 0;i < 4+4*stages;i++){
+            str_def += " ";
+        }
+        this.setText(str_def);
         this.fill_color = fill_color;
         this.paint_color = paint_color;
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
-        this.int_numberofflower = int_numberofflower;
+        this.stages = stages;
     }
 
     public void setFill_color(int fill_color) {
@@ -92,7 +96,7 @@ public class FileTextView extends TextView {
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
         this.radius = (float) (getTextSize()*0.3);
-        canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius,radius,paint);
+        canvas.drawCircle(tv_posX+2*radius+3*stages*radius,tv_posY+2*radius,radius,paint);
 
     }
 

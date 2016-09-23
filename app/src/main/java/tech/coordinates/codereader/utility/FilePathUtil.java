@@ -134,7 +134,7 @@ public class FilePathUtil {
                 count2++;
             }
         }
-        return count1-count2;
+        return count2-count1;
     }
 
 

@@ -33,12 +33,12 @@ public class OnFileItemClicked implements View.OnClickListener {
     private Handler handler_main;
     private String content;
     private Fragment fragment_content;
-    public OnFileItemClicked(Context context){
+
+    public OnFileItemClicked(Context context) {
         this.context = context;
     }
-    public boolean isFile = false;
 
-    static{
+    static {
         conn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -50,35 +50,35 @@ public class OnFileItemClicked implements View.OnClickListener {
             }
         };
     }
+
     /**
      * 此处为点击目录树中的文件的响应事件
      * 1.文件 启动OpenFileService，调用getFileContent(String file_path)方法
-     *       在TextFragment处显示文本内容
+     * 在TextFragment处显示文本内容
+     *
      * @param v
      */
     @Override
     public void onClick(final View v) {
-        if (isFile){
-            final String path = ((FileTextView)v).getCurrentPath();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    str_content = open_file_service.getFileContent(path);
-                    Log.d("Debug",str_content[0]);
-                    if (str_content[0].equals(OpenFileService.READ_FILE_OK)){
-                        //向主线程发送数据
-                        Looper.prepare();
-                        handler_main = ReadActivity.getHandler_main();
-                        Message msg = handler_main.obtainMessage();
-                        msg.obj = str_content[1];
-                        Log.d("Debug","Listener"+str_content[1]);
-                        handler_main.sendMessage(msg);
-                        Looper.loop();
-                    }
-
+        final String path = ((FileTextView) v).getCurrentPath();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                str_content = open_file_service.getFileContent(path);
+                Log.d("Debug", str_content[0]);
+                if (str_content[0].equals(OpenFileService.READ_FILE_OK)) {
+                    //向主线程发送数据
+                    Looper.prepare();
+                    handler_main = ReadActivity.getHandler_main();
+                    Message msg = handler_main.obtainMessage();
+                    msg.obj = str_content[1];
+                    Log.d("Debug", "Listener" + str_content[1]);
+                    handler_main.sendMessage(msg);
+                    Looper.loop();
                 }
-            }).start();
-        }
+
+            }
+        }).start();
     }
 
 }

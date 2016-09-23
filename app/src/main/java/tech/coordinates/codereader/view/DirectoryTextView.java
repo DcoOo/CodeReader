@@ -30,6 +30,7 @@ public class DirectoryTextView extends TextView {
     /**
      *当前TextView的坐标
      */
+    private int stages;
     private float tv_posX;
     private float tv_posY;
     /**
@@ -49,11 +50,11 @@ public class DirectoryTextView extends TextView {
 
 
     public DirectoryTextView(Context context, AttributeSet attrs){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,false);
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,false,0);
     }
 
     public DirectoryTextView(Context context, AttributeSet attrs,boolean isOpened){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,isOpened);
+        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,isOpened,0);
     }
 
     public void setCurrentPath(String currentPath) {
@@ -66,18 +67,24 @@ public class DirectoryTextView extends TextView {
     }
 
     public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, boolean isOpened) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,isOpened);
+        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,isOpened,0);
     }
 
 
 
-    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, int paint_color,boolean isOpened) {
+    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, int paint_color,boolean isOpened,int stages) {
         super(context,attrs);
+        String str_def = "";
+        for(int i = 0;i < 4+4*stages;i++){
+            str_def += " ";
+        }
         this.fill_color = fill_color;
         this.paint_color = paint_color;
         this.tv_posX = this.getX();
         this.tv_posY = this.getY();
         this.isOpened = isOpened;
+        this.stages = stages;
+        this.setText(str_def);
     }
 
     public void setPaint_color(int paint_color) {
@@ -92,6 +99,10 @@ public class DirectoryTextView extends TextView {
         this.radius = radius;
     }
 
+    public int getStages() {
+        return stages;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -104,7 +115,7 @@ public class DirectoryTextView extends TextView {
          * 设置左边圆圈的位置
          */
         this.radius = (float) (getTextSize()*0.3);
-        canvas.drawCircle(tv_posX+2*radius,tv_posY+2*radius, radius,paint);
+        canvas.drawCircle(tv_posX+2*radius+stages*radius*3,tv_posY+2*radius, radius,paint);
     }
 
     public int getFill_color() {

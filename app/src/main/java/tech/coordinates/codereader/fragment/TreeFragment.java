@@ -104,11 +104,10 @@ public class TreeFragment extends Fragment {
 
     public View addView(String name, File file){
         if (file.isFile()){
-            tv_file = new FileTextView(this.getContext(),null,FILE_COLOR);
+            tv_file = new FileTextView(this.getContext(),null,FILE_COLOR,0);
             tv_file.setLayoutParams(params_ftv);
             tv_file.append(name);
             ((FileTextView) tv_file).setCurrentPath(file.getPath());
-            ((OnFileItemClicked)file_listener).isFile = true;
             tv_file.setOnClickListener(file_listener);
             //啊！！！！！！！！！以后一定先设计好 改好麻烦 - -   一定要多一个父类
         }else {
@@ -117,6 +116,7 @@ public class TreeFragment extends Fragment {
             tv_file.setLayoutParams(params_ftv);
             tv_file.setText("    "+name);
             ((DirectoryTextView) tv_file).setCurrentPath(file.getPath());
+            Log.d("Debug",file.getPath());
             //Add Listener
             tv_file.setOnClickListener(new OnDirectoryItemClicked(TreeFragment.this));
         }

@@ -26,6 +26,7 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
     private LinearLayout ll;
     private DirectoryTextView dtv;
     private FileTextView ftv;
+    private OnFileItemClicked file_listener;
     private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
             (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -52,19 +53,6 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
         }
 
     }
-
-//    private void addChildFiles(View view){
-//        File[] files = FilePathUtil.getFileList(new File(((DirectoryTextView)view).getCurrentPath()));
-//        Log.d("Debug","List Files");
-//        if (files == null){
-//            return ;
-//        }
-//        for (File f : files){
-//            String path = f.getPath();
-//            ll_tree_main.addView(fragment.addView(FilePathUtil.getItemNameByPath(path),f));
-//        }
-//
-//    }
     public void showChildFiles(View parent){
         File[] files = FilePathUtil.getFileList(new File(((DirectoryTextView)parent).getCurrentPath()));
         if (files == null){
@@ -72,18 +60,23 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
         }
         for (File f : files){
             if (f.isFile()){
-                ftv = new FileTextView(fragment.getContext(),null,0);
+                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(),f.getPath());
+                Log.d("Debug","File:"+stages);
+                ftv = new FileTextView(fragment.getContext(),null,stages);
                 ftv.setLayoutParams(params_ftv);
                 ftv.setCurrentPath(f.getPath());
-                ftv.setText("    "+f.getName());
+                ftv.append(f.getName());
                 ((LinearLayout)parent.getParent()).addView(ftv);
+                file_listener = new OnFileItemClicked(fragment.getContext());
+                ftv.setOnClickListener(file_listener);
             }
             else {
                 ll = new LinearLayout(fragment.getContext());
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ((LinearLayout)parent.getParent()).addView(ll);
-                dtv = new DirectoryTextView(fragment.getContext(),null);
-                dtv.setText("    "+FilePathUtil.getItemNameByPath(f.getPath()));
+                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(),f.getPath());
+                dtv = new DirectoryTextView(fragment.getContext(),null,TreeFragment.DIRECTORY_UNOPENED_COLOR,Color.BLACK,false,stages);
+                dtv.append(f.getName());
                 dtv.setCurrentPath(f.getPath());
                 dtv.setOnClickListener(this);
                 ll.addView(dtv);
