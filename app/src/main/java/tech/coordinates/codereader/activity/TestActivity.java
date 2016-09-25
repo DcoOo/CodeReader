@@ -53,9 +53,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
-        ll_main = (LinearLayout) findViewById(R.id.ll_main);
-        dtv_root = (DirectoryTextView) findViewById(R.id.dtv_dir);
-        dtv_root.setOnClickListener(this);
+
     }
 
     @Override

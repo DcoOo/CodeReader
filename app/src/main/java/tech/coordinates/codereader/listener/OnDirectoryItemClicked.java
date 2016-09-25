@@ -28,7 +28,7 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
     private FileTextView ftv;
     private OnFileItemClicked file_listener;
     private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-            (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            (ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
     public OnDirectoryItemClicked(TreeFragment fragment){
         this.fragment = fragment;
@@ -59,6 +59,7 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
             return ;
         }
         for (File f : files){
+            Log.d("Debug",f.getPath());
             if (f.isFile()){
                 int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(),f.getPath());
                 Log.d("Debug","File:"+stages);

@@ -49,6 +49,9 @@ public class OpenFileService extends Service {
      * @throws IOException
      */
     public String[] getFileContent(String file_path){
+        /**
+         * 保留插入对编码的处理，按照文本的编码格式来打开文本，否则会出现乱码
+         */
         String[] content = new String[2];
         random_file_read = null;
         //可以添加设置文件编码的功能CharSet实现

@@ -35,7 +35,7 @@ public class TreeFragment extends Fragment {
     public static final int DIRECTORY_OPENED_COLOR = Color.BLACK;
 
     private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-            (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            (ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
     public static TextView getTv_root() {
         return tv_root;
