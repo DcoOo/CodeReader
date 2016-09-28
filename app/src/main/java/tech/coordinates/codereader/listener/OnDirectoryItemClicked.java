@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import tech.coordinates.codereader.view.FileTextView;
  * Created by Administrator on 2016/9/21.
  */
 public class OnDirectoryItemClicked implements View.OnClickListener {
+
     //不要随便的定义static变量！！！！！！！！！！
     private LinearLayout ll_tree_main;
     private TreeFragment fragment;
@@ -42,7 +44,8 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
             ((DirectoryTextView) v).isOpened = false;
             ((DirectoryTextView) v).setPaint_color(TreeFragment.DIRECTORY_UNOPENED_COLOR);
             v.invalidate();
-            //删除当前目录下的所有子文件
+            //删除当前目录下的所有子文件,获取所有的View
+            deleteChildFiles(v);
         }else {
             //目前是未打开状态，再次点击时打开directory，然后显示其子孩子
             ((DirectoryTextView) v).isOpened = true;
@@ -83,7 +86,13 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
                 ll.addView(dtv);
             }
         }
+    }
 
-
+    private void deleteChildFiles(View clicked_view){
+        ViewGroup parent_view = (ViewGroup) clicked_view.getParent();
+        for (int i = 1;i < parent_view.getChildCount();i++){
+            parent_view.removeViewAt(i);
+            i--;
+        }
     }
 }

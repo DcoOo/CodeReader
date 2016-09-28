@@ -90,10 +90,12 @@ public class ReadActivity extends AppCompatActivity implements
 
     private void showInTextFragment() {
         Bundle argument = new Bundle();
+        /**
+         *保留对content处理，使用SpannableString进行代码高亮的处理
+         */
         argument.putString("content",file_content);
         fragment_content = new ContentFragment();
         fragment_content.setArguments(argument);
-        Log.d("Debug","Fragment"+file_content);
         getFragmentManager().beginTransaction().replace(R.id.fm_file_content,fragment_content).commit();
     }
 

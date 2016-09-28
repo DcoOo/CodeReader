@@ -12,7 +12,10 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 
+import tech.coordinates.codereader.utility.EncodeManager;
 import tech.coordinates.codereader.utility.MyBinder;
 
 public class OpenFileService extends Service {
@@ -34,9 +37,6 @@ public class OpenFileService extends Service {
 
     public class OpenFileBinder extends Binder{
 
-//        protected OpenFileBinder(Service service) {
-//            super(service);
-//        }
         public Service getService(){
             return OpenFileService.this;
         }
@@ -53,6 +53,9 @@ public class OpenFileService extends Service {
          * 保留插入对编码的处理，按照文本的编码格式来打开文本，否则会出现乱码
          */
         String[] content = new String[2];
+        Charset charset = Charset.forName(EncodeManager.getFileEncoding(file_path));
+        Log.d("Debug",EncodeManager.getFileEncoding(file_path));
+        CharsetDecoder decoder = charset.newDecoder();
         random_file_read = null;
         //可以添加设置文件编码的功能CharSet实现
         StringBuilder str_builder = new StringBuilder("");
@@ -65,8 +68,9 @@ public class OpenFileService extends Service {
             return content;
         }
         FileChannel channel_file = random_file_read.getChannel();
-        ByteBuffer buffer_byte = ByteBuffer.allocate(64);
-        CharBuffer buffer_char = CharBuffer.allocate(32);
+        ByteBuffer buffer_byte = ByteBuffer.allocate(2048);
+        //CharBuffer一定要设计的够大，和Byte Buffer一样大就可以，因为编码的问题，Char对应几个bytes不一定
+        CharBuffer buffer_char = CharBuffer.allocate(2048);
         int bytesRead = 0;
         try {
             bytesRead = channel_file.read(buffer_byte);
@@ -75,10 +79,13 @@ public class OpenFileService extends Service {
         }
         while (bytesRead != -1) {
             buffer_byte.flip();
-            while (buffer_byte.hasRemaining()){
-                str_builder.append((char) buffer_byte.get());
+            decoder.decode(buffer_byte,buffer_char,false);
+            buffer_char.flip();
+            while (buffer_char.hasRemaining()){
+                str_builder.append(buffer_char.get());
             }
             buffer_byte.clear();
+            buffer_char.clear();
             try {
                 bytesRead = channel_file.read(buffer_byte);
             } catch (IOException e) {

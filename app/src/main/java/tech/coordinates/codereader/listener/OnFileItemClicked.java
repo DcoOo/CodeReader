@@ -1,9 +1,9 @@
 package tech.coordinates.codereader.listener;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
@@ -12,9 +12,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
-import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.activity.ReadActivity;
-import tech.coordinates.codereader.fragment.ContentFragment;
 import tech.coordinates.codereader.service.OpenFileService;
 import tech.coordinates.codereader.view.FileTextView;
 
@@ -33,6 +31,8 @@ public class OnFileItemClicked implements View.OnClickListener {
     private Handler handler_main;
     private String content;
     private Fragment fragment_content;
+
+    private boolean isOpenFileServiceBinded = false;
 
     public OnFileItemClicked(Context context) {
         this.context = context;
@@ -64,8 +64,12 @@ public class OnFileItemClicked implements View.OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Intent i = new Intent(context,OpenFileService.class);
+                if (!isOpenFileServiceBinded){
+                    context.bindService(i,conn,Context.BIND_AUTO_CREATE);
+                    isOpenFileServiceBinded = true;
+                }
                 str_content = open_file_service.getFileContent(path);
-                Log.d("Debug", str_content[0]);
                 if (str_content[0].equals(OpenFileService.READ_FILE_OK)) {
                     //向主线程发送数据
                     Looper.prepare();
