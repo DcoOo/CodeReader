@@ -9,10 +9,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.fragment.ContentFragment;
@@ -21,6 +25,7 @@ import tech.coordinates.codereader.listener.DialogLoadFileListener;
 import tech.coordinates.codereader.service.OpenFileService;
 import tech.coordinates.codereader.service.TestService;
 import tech.coordinates.codereader.utility.ServicesManager;
+import tech.coordinates.codereader.utility.SpannableUtility;
 
 /**
  * Created by Administrator on 2016/9/17.
@@ -30,6 +35,7 @@ public class ReadActivity extends AppCompatActivity implements
 
     public static final String STR_ROOT_PATH = "path";
     public static final String STR_ROOT_NAME = "name";
+    public static final String SPAN_STR_HL = "SPANSTR";
 
     private static Handler handler_main = null;
     private static String file_content = "";
@@ -93,7 +99,7 @@ public class ReadActivity extends AppCompatActivity implements
         /**
          *保留对content处理，使用SpannableString进行代码高亮的处理
          */
-        argument.putString("content",file_content);
+        argument.putSerializable("content", file_content);
         fragment_content = new ContentFragment();
         fragment_content.setArguments(argument);
         getFragmentManager().beginTransaction().replace(R.id.fm_file_content,fragment_content).commit();

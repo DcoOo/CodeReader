@@ -4,12 +4,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import tech.coordinates.codereader.R;
+import tech.coordinates.codereader.activity.ReadActivity;
+import tech.coordinates.codereader.utility.SpannableUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +69,8 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
-        ((TextView)view.findViewById(R.id.test_tv)).setText(mParam1);
+        SpannableString span_str = SpannableUtility.codeHighLight4JAVA(mParam1);
+        ((TextView)view.findViewById(R.id.test_tv)).setText(span_str == null?"":span_str);
         return view;
     }
 

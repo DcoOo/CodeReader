@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Administrator on 2016/9/15.
  */
-public class    FileNameFilter implements FilenameFilter {
+public class FileNameFilter implements FilenameFilter {
     /**
      * 目前先简单的可以显示这几种文件
      */
