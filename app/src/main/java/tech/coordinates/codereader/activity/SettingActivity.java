@@ -70,7 +70,6 @@ public class SettingActivity extends AppCompatActivity {
         //按后退之后再次点击没有调用该方法
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Log.d("Debug","Context Listener");
             View itemView;
             int id = item.getItemId();
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
