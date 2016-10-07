@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
 import tech.coordinates.codereader.utility.EncodeManager;
+import tech.coordinates.codereader.utility.FileNameFilter;
 import tech.coordinates.codereader.utility.MyBinder;
 
 public class OpenFileService extends Service {
@@ -49,6 +50,12 @@ public class OpenFileService extends Service {
      * @throws IOException
      */
     public String[] getFileContent(String file_path){
+        /**
+         * 对文件名进行过滤。不符合的文件暂时无法打开
+         */
+        if (!isAccept(file_path)){
+            return new String[]{OPEN_FILE_FAILED,null};
+        }
         /**
          * 保留插入对编码的处理，按照文本的编码格式来打开文本，否则会出现乱码
          */
@@ -100,6 +107,10 @@ public class OpenFileService extends Service {
         content[0] = READ_FILE_OK;
         content[1] = str_builder.toString();
         return content;
+    }
+
+    private boolean isAccept(String path){
+        return new FileNameFilter().accept(null,path);
     }
 
 }

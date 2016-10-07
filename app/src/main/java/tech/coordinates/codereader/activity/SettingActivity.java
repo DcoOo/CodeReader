@@ -29,6 +29,7 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         tv_load_file = findViewById(R.id.tv_load_file);
@@ -92,6 +93,18 @@ public class SettingActivity extends AppCompatActivity {
         et_path = TVLoadFileListener.getEt_path();
         et_path.setText("");
         et_path.setText(path);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
 

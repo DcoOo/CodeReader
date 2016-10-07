@@ -22,6 +22,7 @@ public class SpannableUtility {
     private static final String END = "END";
     private static final int HIGH_LIGNT_BLUE = Color.BLUE;
     private static final String HIGH_LIGNT_GREEN = "#008B00";
+    private static final String EXPLAIN_NOTA = "#551A8B";
 
     private static String s_content;
 
@@ -31,7 +32,6 @@ public class SpannableUtility {
             SpannableString span_str = null;
             s_content = content;
             span_str = new SpannableString(s_content);
-//            span_color = new ForegroundColorSpan(DEFAULT_HIGH_LIGHT_COLOR);
             list_map_words.addAll(getStartAndEnd(RegexString.JAVA_ACCESS_CONTROL));
             list_map_words.addAll(getStartAndEnd(RegexString.JAVA_BASIC_TYPE));
             list_map_words.addAll(getStartAndEnd(RegexString.JAVA_EXCEPTION));
@@ -52,7 +52,12 @@ public class SpannableUtility {
                 ForegroundColorSpan span_color = new ForegroundColorSpan(Color.parseColor(HIGH_LIGNT_GREEN));
                 span_str.setSpan(span_color,m.get(START),m.get(END), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-
+            list_map_words.clear();
+            list_map_words.addAll(getStartAndEnd(RegexString.JAVA_EXPLAIN_NOTA));
+            for (Map<String,Integer> m : list_map_words){
+                ForegroundColorSpan span_color = new ForegroundColorSpan(Color.parseColor(EXPLAIN_NOTA));
+                span_str.setSpan(span_color,m.get(START),m.get(END), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             return span_str;
         }
         return null;

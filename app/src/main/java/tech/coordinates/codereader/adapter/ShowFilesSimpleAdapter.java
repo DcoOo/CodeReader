@@ -1,6 +1,7 @@
 package tech.coordinates.codereader.adapter;
 
 import android.content.Context;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class ShowFilesSimpleAdapter extends SimpleAdapter {
      */
 
     public ShowFilesSimpleAdapter(Context context, List<? extends Map<String, ?>> data) {
-        super(context, data, R.layout.listview_item_show_file,new String[]{"name","path","isFile"},new int[]{R.id.tv_item_name,R.id.tv_item_path,R.id.tv_item_isFile});
+        super(context, data, R.layout.listview_item_show_file,new String[]{"icPath","name","path","isFile"},new int[]{R.id.iv_item_type,R.id.tv_item_name,R.id.tv_item_path,R.id.tv_item_isFile});
     }
+
 }

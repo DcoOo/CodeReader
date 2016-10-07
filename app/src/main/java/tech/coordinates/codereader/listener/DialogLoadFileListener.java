@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.HashMap;
@@ -29,7 +30,9 @@ import tech.coordinates.codereader.utility.FilePathUtil;
  * 刷新操作由Activity实现
  */
 public class DialogLoadFileListener implements DialogInterface.OnClickListener {
-
+    /**
+     * 只有给STR_IETM_PATH和STR_ITEM_NAME赋值才能跳转到ReadActivity
+     */
     public static final String STR_ITEM_PATH = "item_path";
     public static final String STR_ITEM_NAME = "item_name";
     public static final String FILE = "1";
@@ -54,12 +57,10 @@ public class DialogLoadFileListener implements DialogInterface.OnClickListener {
     }
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-//        Intent intent = new Intent(activity_setting, ReadActivity.class);
-//        str_item_path = ((SettingActivity)activity_setting).getFile_path();
-//        str_item_name = FilePathUtil.getItemNameByPath(str_item_path,new File(str_item_path).isFile());
-//        intent.putExtra(STR_ITEM_PATH,str_item_path);
-//        intent.putExtra(STR_ITEM_NAME,str_item_name);
-//        activity_setting.startActivity(intent);
+        if (str_item_name.equals("") || str_item_name == null || str_item_path.equals("") || str_item_path == null){
+            Toast.makeText(activity_setting,"找不到指定的文件",Toast.LENGTH_LONG).show();
+            return ;
+        }
         Intent intent = new Intent(activity_setting, ReadActivity.class);
         intent.putExtra(STR_ITEM_NAME,str_item_name);
         intent.putExtra(STR_ITEM_PATH,str_item_path);

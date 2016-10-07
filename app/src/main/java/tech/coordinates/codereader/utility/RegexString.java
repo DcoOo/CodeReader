@@ -22,5 +22,6 @@ public abstract class RegexString {
     public static final String JAVA_BASIC_TYPE = "\\bboolean\\b|\\bbyte\\b|\\bint\\b|\\bfloat\\b|\\bdouble\\b|\\bchar\\b|\\blong\\b|\\bshort\\b|\\bnull\\b|\\btrue\\b|\\bfalse\\b";
     public static final String JAVA_VARIABLE_LEAD = "\\bsuper\\b|\\bthis\\b|\\bvoid\\b";
     public static final String JAVA_REMAIN_WORDS = "\\bgoto\\b|\\bconst\\b";
+    public static final String JAVA_EXPLAIN_NOTA = "\\@.*";
 
 }

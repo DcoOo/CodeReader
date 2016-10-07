@@ -17,6 +17,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import tech.coordinates.codereader.R;
+
 /**
  * Created by Administrator on 2016/9/17.
  */
@@ -113,11 +115,23 @@ public class FilePathUtil {
                 map_file.put("path",f.getPath());
                 map_file.put("name",f.getName());
                 map_file.put("isFile",f.isFile()?FILE:DIRECTORY);
+                map_file.put("icPath",getICType(f.isFile())+"");
                 data.add(map_file);
             }
             return data;
         }
         return null;
+    }
+
+    /**
+     * 对于不同的文件使用不同的图标
+     * @return
+     */
+    private static int getICType(boolean isFile){
+        if (isFile){
+            return R.drawable.ic_code;
+        }
+        return R.drawable.ic_directory2;
     }
 
     public static int getNumberOfFlow(String root_path,String current_path){
