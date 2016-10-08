@@ -39,10 +39,8 @@ public class OnBrowseClicked implements View.OnClickListener {
             }
         });
         alertDialog = builder.show();
-        alertDialog.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         lv_show_files.setOnItemClickListener(new ListViewFilesOnClickListener(activity_setting,alertDialog,lv_show_files));
         ((Activity) activity_setting).registerForContextMenu(lv_show_files);
     }
-
 
 }
