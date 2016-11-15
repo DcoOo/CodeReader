@@ -1,17 +1,24 @@
 package tech.coordinates.codereader.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 import tech.coordinates.codereader.R;
-import tech.coordinates.codereader.activity.ReadActivity;
+import tech.coordinates.codereader.structure.FileStructure;
+import tech.coordinates.codereader.structure.HighLightUtil;
+import tech.coordinates.codereader.structure.Row;
+import tech.coordinates.codereader.structure.Word;
 import tech.coordinates.codereader.utility.SpannableUtility;
 
 /**
@@ -26,10 +33,11 @@ public class ContentFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "content";
+    ArrayList<LinkedList<String>> array_content;
 //    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private LinkedList<String> linkedlist_content;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -59,7 +67,7 @@ public class ContentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            linkedlist_content = (LinkedList<String>) getArguments().getSerializable(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -69,8 +77,13 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
-        SpannableString span_str = SpannableUtility.codeHighLight4JAVA(mParam1);
-        ((TextView)view.findViewById(R.id.test_tv)).setText(span_str == null?"":span_str);
+        if (linkedlist_content != null){
+            FileStructure fileStructure = new FileStructure(linkedlist_content);
+            new HighLightUtil(fileStructure,null);
+
+        }
+//        SpannableString span_str = SpannableUtility.codeHighLight4JAVA(test);
+//        ((TextView)view.findViewById(R.id.test_tv)).setText(span_str == null?"":span_str);
         return view;
     }
 

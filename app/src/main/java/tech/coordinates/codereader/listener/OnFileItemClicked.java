@@ -12,6 +12,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import java.io.IOException;
+import java.util.LinkedList;
+
 import tech.coordinates.codereader.activity.ReadActivity;
 import tech.coordinates.codereader.service.OpenFileService;
 import tech.coordinates.codereader.view.FileTextView;
@@ -27,7 +30,7 @@ public class OnFileItemClicked implements View.OnClickListener {
     private static ServiceConnection conn;
 
     private Context context;
-    private String[] str_content;
+    private LinkedList<String> link_list_content;
     private Handler handler_main;
     private String content;
     private Fragment fragment_content;
@@ -64,23 +67,25 @@ public class OnFileItemClicked implements View.OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(context,OpenFileService.class);
-                if (!isOpenFileServiceBinded){
-                    context.bindService(i,conn,Context.BIND_AUTO_CREATE);
+                Intent i = new Intent(context, OpenFileService.class);
+                if (!isOpenFileServiceBinded) {
+                    context.bindService(i, conn, Context.BIND_AUTO_CREATE);
                     isOpenFileServiceBinded = true;
                 }
-                str_content = open_file_service.getFileContent(path);
-                if (str_content[0].equals(OpenFileService.READ_FILE_OK)) {
-                    //向主线程发送数据
-                    Looper.prepare();
-                    handler_main = ReadActivity.getHandler_main();
-                    Message msg = handler_main.obtainMessage();
-                    msg.obj = str_content[1];
-                    Log.d("Debug", "Listener" + str_content[1]);
-                    handler_main.sendMessage(msg);
-                    Looper.loop();
+                try {
+                    link_list_content = open_file_service.getFileContent(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
+//                    if (str_content[0].equals(OpenFileService.READ_FILE_OK)) {
+                //向主线程发送数据
+                Looper.prepare();
+                handler_main = ReadActivity.getHandler_main();
+                Message msg = handler_main.obtainMessage();
+                msg.obj = link_list_content;
+//                    Log.d("Debug", "Listener" + str_content[1]);
+                handler_main.sendMessage(msg);
+                Looper.loop();
             }
         }).start();
     }

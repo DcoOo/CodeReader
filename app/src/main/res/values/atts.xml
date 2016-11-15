@@ -3,4 +3,7 @@
     <declare-styleable name="MyRules">
         <attr name="rules_color" format="color"/>
     </declare-styleable>
+    <declare-styleable name="Rules">
+        <attr name="rules_color" format=""
+    </declare-styleable>
 </resources>

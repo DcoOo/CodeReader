@@ -16,16 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.Serializable;
+import java.util.LinkedList;
 
 import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.fragment.ContentFragment;
 import tech.coordinates.codereader.fragment.TreeFragment;
 import tech.coordinates.codereader.listener.DialogLoadFileListener;
-import tech.coordinates.codereader.service.OpenFileService;
-import tech.coordinates.codereader.service.TestService;
-import tech.coordinates.codereader.utility.ServicesManager;
-import tech.coordinates.codereader.utility.SpannableUtility;
 
 /**
  * Created by Administrator on 2016/9/17.
@@ -38,7 +34,7 @@ public class ReadActivity extends AppCompatActivity implements
     public static final String SPAN_STR_HL = "SPANSTR";
 
     private static Handler handler_main = null;
-    private static String file_content = "";
+    private static LinkedList<String> file_content;
 
     private Button btn_back;
     private android.support.v4.app.Fragment fm_tree;
@@ -75,7 +71,7 @@ public class ReadActivity extends AppCompatActivity implements
 
     }
 
-    public static String getFile_content() {
+    public static LinkedList<String> getFile_content() {
         return file_content;
     }
 
@@ -87,7 +83,7 @@ public class ReadActivity extends AppCompatActivity implements
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                file_content = (String) msg.obj;
+                file_content = (LinkedList<String>) msg.obj;
                 Log.d("Debug","Main handler"+file_content);
                 showInTextFragment();
             }
