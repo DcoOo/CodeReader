@@ -35,7 +35,7 @@ public class TreeFragment extends Fragment {
     public static final int DIRECTORY_OPENED_COLOR = Color.BLACK;
 
     private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-            (ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     public static TextView getTv_root() {
         return tv_root;
@@ -74,12 +74,13 @@ public class TreeFragment extends Fragment {
     private FileTextView ftv_file;
     private DirectoryTextView dtv_directory;
     private View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_tree,container,false);
+        view = inflater.inflate(R.layout.fragment_tree, container, false);
         ll_items_tree_main = (LinearLayout) view.findViewById(R.id.ll_fm_tree_main);
-        if (ll_items_tree_main == null){
+        if (ll_items_tree_main == null) {
             try {
                 throw new LayoutNotFoundException();
             } catch (LayoutNotFoundException e) {
@@ -93,30 +94,30 @@ public class TreeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (bundle_data_from_read_activity != null){
+        if (bundle_data_from_read_activity != null) {
             str_root_item_path = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_PATH);
             str_root_item_name = bundle_data_from_read_activity.getString(ReadActivity.STR_ROOT_NAME);
         }
-        Log.d("Debug","TreeFragment onActivityCreated");
-        tv_root = (TextView) addView(str_root_item_name,new File(str_root_item_path));
+        Log.d("Debug", "TreeFragment onActivityCreated");
+        tv_root = (TextView) addView(str_root_item_name, new File(str_root_item_path));
         ll_items_tree_main.addView(tv_file);
     }
 
-    public View addView(String name, File file){
-        if (file.isFile()){
-            tv_file = new FileTextView(this.getContext(),null,FILE_COLOR,0);
+    public View addView(String name, File file) {
+        if (file.isFile()) {
+            tv_file = new FileTextView(this.getContext(), null, FILE_COLOR, 0);
             tv_file.setLayoutParams(params_ftv);
             tv_file.append(name);
             ((FileTextView) tv_file).setCurrentPath(file.getPath());
             tv_file.setOnClickListener(file_listener);
             //啊！！！！！！！！！以后一定先设计好 改好麻烦 - -   一定要多一个父类
-        }else {
+        } else {
             //Directory Into
-            tv_file = new DirectoryTextView(this.getContext(),null,DIRECTORY_UNOPENED_COLOR,false);
+            tv_file = new DirectoryTextView(this.getContext(), null, DIRECTORY_UNOPENED_COLOR, false);
             tv_file.setLayoutParams(params_ftv);
-            tv_file.setText("    "+name);
+            tv_file.setText("    " + name);
             ((DirectoryTextView) tv_file).setCurrentPath(file.getPath());
-            Log.d("Debug",file.getPath());
+            Log.d("Debug", file.getPath());
             //Add Listener
             tv_file.setOnClickListener(new OnDirectoryItemClicked(TreeFragment.this));
         }

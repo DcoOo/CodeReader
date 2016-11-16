@@ -41,15 +41,16 @@ public class OpenFileService extends Service {
         return openFileBinder;
     }
 
-    public class OpenFileBinder extends Binder{
+    public class OpenFileBinder extends Binder {
 
-        public Service getService(){
+        public Service getService() {
             return OpenFileService.this;
         }
     }
 
     /**
      * 使用NIO来读取
+     *
      * @param file_path 需要读取的文件路径
      * @return 一个String数组，长度为2，String[0]:状态码 String[1]:文件内容
      * @throws IOException
@@ -58,7 +59,7 @@ public class OpenFileService extends Service {
         /**
          * 对文件名进行过滤。不符合的文件暂时无法打开
          */
-        if (!isAccept(file_path)){
+        if (!isAccept(file_path)) {
             return null;
         }
         /**
@@ -67,8 +68,8 @@ public class OpenFileService extends Service {
         LinkedList<String> content = new LinkedList<>();
         File f = new File(file_path);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-        String line ;
-        while ((line = reader.readLine())!=null){
+        String line;
+        while ((line = reader.readLine()) != null) {
             content.add(line);
         }
 //        Charset charset = Charset.forName(EncodeManager.getFileEncoding(file_path));
@@ -120,8 +121,8 @@ public class OpenFileService extends Service {
         return content;
     }
 
-    private boolean isAccept(String path){
-        return new FileNameFilter().accept(null,path);
+    private boolean isAccept(String path) {
+        return new FileNameFilter().accept(null, path);
     }
 
 }

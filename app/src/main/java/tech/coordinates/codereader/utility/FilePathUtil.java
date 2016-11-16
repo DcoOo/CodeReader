@@ -31,19 +31,22 @@ public class FilePathUtil {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-            if (isExternalStorageDocument(uri)) {// ExternalStorageProvider
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
                 if ("primary".equalsIgnoreCase(type)) {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            } else if (isDownloadsDocument(uri)) {// DownloadsProvider
+                // DownloadsProvider
+            } else if (isDownloadsDocument(uri)) {
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
                         Long.valueOf(id));
                 return getDataColumn(context, contentUri, null, null);
-            } else if (isMediaDocument(uri)) {// MediaProvider
+                // MediaProvider
+            } else if (isMediaDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -59,11 +62,13 @@ public class FilePathUtil {
                 final String[] selectionArgs = new String[]{split[1]};
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
-        } else if ("content".equalsIgnoreCase(uri.getScheme())) {// MediaStore
+            // MediaStore
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             // (and
             // general)
             return getDataColumn(context, uri, null, null);
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {// File
+            // File
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
         }
         return null;
@@ -96,26 +101,27 @@ public class FilePathUtil {
         return null;
     }
 
-    public static File[] getFileList(File file){
-        if (file.isDirectory()){
-            if (file.listFiles() != null){
+    public static File[] getFileList(File file) {
+        if (file.isDirectory()) {
+            if (file.listFiles() != null) {
                 return file.listFiles();
             }
             return null;
         }
         return null;
     }
-    public static  List<Map<String,String>> getTargetDir(String path){
-        List<Map<String,String>> data = new LinkedList<>();
+
+    public static List<Map<String, String>> getTargetDir(String path) {
+        List<Map<String, String>> data = new LinkedList<>();
         File[] files = FilePathUtil.getFileList(new File(path));
-        Map<String,String> map_file;
-        if (files != null){
-            for (File f : files){
+        Map<String, String> map_file;
+        if (files != null) {
+            for (File f : files) {
                 map_file = new HashMap<>();
-                map_file.put("path",f.getPath());
-                map_file.put("name",f.getName());
-                map_file.put("isFile",f.isFile()?FILE:DIRECTORY);
-                map_file.put("icPath",getICType(f.isFile())+"");
+                map_file.put("path", f.getPath());
+                map_file.put("name", f.getName());
+                map_file.put("isFile", f.isFile() ? FILE : DIRECTORY);
+                map_file.put("icPath", getICType(f.isFile()) + "");
                 data.add(map_file);
             }
             return data;
@@ -125,30 +131,31 @@ public class FilePathUtil {
 
     /**
      * 对于不同的文件使用不同的图标
+     *
      * @return
      */
-    private static int getICType(boolean isFile){
-        if (isFile){
+    private static int getICType(boolean isFile) {
+        if (isFile) {
             return R.drawable.ic_code;
         }
         return R.drawable.ic_directory2;
     }
 
-    public static int getNumberOfFlow(String root_path,String current_path){
+    public static int getNumberOfFlow(String root_path, String current_path) {
         int numberofflow = 0;
         int count1 = 0;
         int count2 = 0;
-        for (char c : root_path.toCharArray()){
-            if (c == '/'){
+        for (char c : root_path.toCharArray()) {
+            if (c == '/') {
                 count1++;
             }
         }
-        for (char c : current_path.toCharArray()){
-            if (c == '/'){
+        for (char c : current_path.toCharArray()) {
+            if (c == '/') {
                 count2++;
             }
         }
-        return count2-count1;
+        return count2 - count1;
     }
 
 

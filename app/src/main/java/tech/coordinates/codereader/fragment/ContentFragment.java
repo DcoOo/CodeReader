@@ -18,7 +18,9 @@ import tech.coordinates.codereader.R;
 import tech.coordinates.codereader.structure.FileStructure;
 import tech.coordinates.codereader.structure.HighLightUtil;
 import tech.coordinates.codereader.structure.Row;
+import tech.coordinates.codereader.structure.RowProperty;
 import tech.coordinates.codereader.structure.Word;
+import tech.coordinates.codereader.structure.WordProperty;
 import tech.coordinates.codereader.utility.SpannableUtility;
 
 /**
@@ -77,9 +79,67 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
-        if (linkedlist_content != null){
+        if (linkedlist_content != null) {
+            //创建文件结构，由行、列、词组成
             FileStructure fileStructure = new FileStructure(linkedlist_content);
-            new HighLightUtil(fileStructure,null);
+            //对每行进行分析，为所有的词添加属性
+            new HighLightUtil(fileStructure, null);
+            //打印所有词的属性检查
+            for (Row row : fileStructure.getRow_array_list()) {
+                if (row.getRowProperty() != RowProperty.ROW_PROPERTY_SINGLE_LINE_COMMENT && row.getRowProperty() != RowProperty.ROW_PROPERTY_MULTI_LINE_COMMENT)
+                    for (Word word : row.getList_words()) {
+                        switch (word.getProperty()) {
+                            case 0:
+                                Log.d("debug", word.toString() + "|package control");
+                                break;
+                            case 1:
+                                Log.d("debug", word.toString() + "|routine control");
+                                break;
+                            case 2:
+                                Log.d("debug", word.toString() + "|error handle");
+                                break;
+                            case 3:
+                                Log.d("debug", word.toString() + "|package");
+                                break;
+                            case 4:
+                                Log.d("debug", word.toString() + "|basic type");
+                                break;
+                            case 5:
+                                Log.d("debug", word.toString() + "|variable link");
+                                break;
+                            case 6:
+                                Log.d("debug", word.toString() + "|modifier");
+                                break;
+                            case 7:
+                                Log.d("debug", word.toString() + "|word retains");
+                                break;
+                            case 8:
+                                Log.d("debug", word.toString() + "|variable name");
+                                break;
+                            case 9:
+                                Log.d("debug", word.toString() + "|function name");
+                                break;
+                            case 10:
+                                Log.d("debug", word.toString() + "|type name");
+                                break;
+                            case 11:
+                                Log.d("debug", word.toString() + "|return type");
+                                break;
+                            case 12:
+                                Log.d("debug", word.toString() + "|interface name");
+                                break;
+                            case 13:
+                                Log.d("debug", word.toString() + "|package name");
+                                break;
+                            case 14:
+                                Log.d("debug", word.toString() + "|import pakage name");
+                                break;
+                            case 15:
+                                Log.d("debug", word.toString() + "|explain");
+                                break;
+                        }
+                    }
+            }
 
         }
 //        SpannableString span_str = SpannableUtility.codeHighLight4JAVA(test);

@@ -24,24 +24,24 @@ public class ServicesManager {
     private static Intent intent_bind;//for bind
     private static Context context;
 
-    private ServicesManager(Context context){
+    private ServicesManager(Context context) {
         this.context = context;
     }
 
-    public  static ServicesManager getServicesManager(Context context){
-        if (servicesManager == null){
+    public static ServicesManager getServicesManager(Context context) {
+        if (servicesManager == null) {
             servicesManager = new ServicesManager(context);
         }
         return servicesManager;
     }
 
-    public static void bindService(Service service,ServiceConnection conn){
-        intent_bind = new Intent(context,service.getClass());
-        Log.d("Debug",context == null?"ServicesManager Context Null":"ServicesManager Context Not Null");
-        context.bindService(intent_bind,conn,Service.BIND_AUTO_CREATE);
+    public static void bindService(Service service, ServiceConnection conn) {
+        intent_bind = new Intent(context, service.getClass());
+        Log.d("Debug", context == null ? "ServicesManager Context Null" : "ServicesManager Context Not Null");
+        context.bindService(intent_bind, conn, Service.BIND_AUTO_CREATE);
     }
 
-    public static void unbindService(Service service,ServiceConnection conn){
+    public static void unbindService(Service service, ServiceConnection conn) {
         context.unbindService(conn);
     }
 

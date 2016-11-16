@@ -23,10 +23,10 @@ import java.nio.charset.CoderResult;
  */
 public class EncodeManager {
 
-    private static String[] ENCODING = new String[]{"utf-8","GBK","unicode","GB2312","iso-8859-1","iso-8859-2"};
+    private static String[] ENCODING = new String[]{"utf-8", "GBK", "unicode", "GB2312", "iso-8859-1", "iso-8859-2"};
     private static FileInputStream file;
 
-    public static String getFileEncoding(String path){
+    public static String getFileEncoding(String path) {
         try {
             file = new FileInputStream(path);
         } catch (FileNotFoundException e) {

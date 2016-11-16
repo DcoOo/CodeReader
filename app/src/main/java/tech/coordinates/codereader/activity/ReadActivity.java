@@ -1,6 +1,5 @@
 package tech.coordinates.codereader.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -84,7 +81,7 @@ public class ReadActivity extends AppCompatActivity implements
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 file_content = (LinkedList<String>) msg.obj;
-                Log.d("Debug","Main handler"+file_content);
+                Log.d("Debug", "Main handler" + file_content);
                 showInTextFragment();
             }
         };
@@ -98,7 +95,7 @@ public class ReadActivity extends AppCompatActivity implements
         argument.putSerializable("content", file_content);
         fragment_content = new ContentFragment();
         fragment_content.setArguments(argument);
-        getFragmentManager().beginTransaction().replace(R.id.fm_file_content,fragment_content).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fm_file_content, fragment_content).commit();
     }
 
     @Override

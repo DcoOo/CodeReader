@@ -43,6 +43,7 @@ public class SettingActivity extends AppCompatActivity {
 
     /**
      * 调用android自带的文件管理器，选择文件，将文件路径输入到EditText中。
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -54,7 +55,7 @@ public class SettingActivity extends AppCompatActivity {
             Uri uri = data.getData();
             et_path = TVLoadFileListener.getEt_path();
             et_path.setText("");
-            this.file_path = FilePathUtil.getPathByUri4kitkat(this,uri);
+            this.file_path = FilePathUtil.getPathByUri4kitkat(this, uri);
             et_path.setText(file_path);
         }
     }
@@ -62,12 +63,12 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuItem menuItem1 = menu.add(1,1,1,"选择该文件夹");
+        MenuItem menuItem1 = menu.add(1, 1, 1, "选择该文件夹");
         menuItem1.setOnMenuItemClickListener(new MyOnMenuItemSelected());
 
     }
 
-    class MyOnMenuItemSelected implements MenuItem.OnMenuItemClickListener{
+    class MyOnMenuItemSelected implements MenuItem.OnMenuItemClickListener {
         //按后退之后再次点击没有调用该方法
         @Override
         public boolean onMenuItemClick(MenuItem item) {
@@ -75,7 +76,7 @@ public class SettingActivity extends AppCompatActivity {
             int id = item.getItemId();
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             itemView = info.targetView;
-            switch (id){
+            switch (id) {
                 case 1:
                     getDirectory(itemView);
                     OnBrowseClicked.alertDialog.dismiss();
@@ -85,9 +86,9 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
-    public void getDirectory(View view){
-        String name = ((TextView)view.findViewById(R.id.tv_item_name)).getText().toString();
-        String path = ((TextView)view.findViewById(R.id.tv_item_path)).getText().toString();
+    public void getDirectory(View view) {
+        String name = ((TextView) view.findViewById(R.id.tv_item_name)).getText().toString();
+        String path = ((TextView) view.findViewById(R.id.tv_item_path)).getText().toString();
         DialogLoadFileListener.setStr_item_name(name);
         DialogLoadFileListener.setStr_item_path(path);
         et_path = TVLoadFileListener.getEt_path();
@@ -97,7 +98,7 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

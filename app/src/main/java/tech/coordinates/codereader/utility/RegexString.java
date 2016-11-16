@@ -12,7 +12,7 @@ public abstract class RegexString {
     public static final String COMMON_COMMENT2 = "/\\*+[\\s\\S]*?\\*+/";
     public static final String COMMON_COMMENT3 = "\\*.*";
     public static final String COMMON_COMMENT4 = "/\\*.*";
-//    public static final String COMMON_COMMENT3 = "^/\\*.*\\*/$";
+    //    public static final String COMMON_COMMENT3 = "^/\\*.*\\*/$";
 //  /\*+([^/]*)\*+/
     public static final String JAVA_ACCESS_CONTROL = "\\bprivate\\b|\\bprotected\\b|\\bpublic\\b";
     public static final String JAVA_MODIFIER = "\\babstract\\b|\\bclass\\b|\\bextends\\b|\\bfinal\\b" +

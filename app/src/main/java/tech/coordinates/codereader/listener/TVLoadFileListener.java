@@ -14,7 +14,6 @@ import tech.coordinates.codereader.R;
 
 /**
  * Created by Administrator on 2016/9/17.'
- *
  */
 public class TVLoadFileListener implements View.OnClickListener {
 
@@ -25,7 +24,7 @@ public class TVLoadFileListener implements View.OnClickListener {
     private Activity activity_setting;
     private static EditText et_path;
 
-    public TVLoadFileListener(Activity activity){
+    public TVLoadFileListener(Activity activity) {
         this.activity_setting = activity;
     }
 
@@ -35,7 +34,7 @@ public class TVLoadFileListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        dialog = LayoutInflater.from(activity_setting).inflate(R.layout.dialog_load_file,null);
+        dialog = LayoutInflater.from(activity_setting).inflate(R.layout.dialog_load_file, null);
         et_path = (EditText) dialog.findViewById(R.id.et_dialog_load_path);
 
         btn_browse = (Button) dialog.findViewById(R.id.btn_dialog_browse);

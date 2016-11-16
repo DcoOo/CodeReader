@@ -30,23 +30,23 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
     private FileTextView ftv;
     private OnFileItemClicked file_listener;
     private ViewGroup.LayoutParams params_ftv = new ViewGroup.LayoutParams
-            (ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-    public OnDirectoryItemClicked(TreeFragment fragment){
+    public OnDirectoryItemClicked(TreeFragment fragment) {
         this.fragment = fragment;
         ll_tree_main = TreeFragment.getTreeLinearLayout();
     }
 
     @Override
     public void onClick(View v) {
-        if (((DirectoryTextView)v).isOpened){
+        if (((DirectoryTextView) v).isOpened) {
             //目前是打开状态，再次点击时关闭Directory,同时将其子孩子在fragment中删除
             ((DirectoryTextView) v).isOpened = false;
             ((DirectoryTextView) v).setPaint_color(TreeFragment.DIRECTORY_UNOPENED_COLOR);
             v.invalidate();
             //删除当前目录下的所有子文件,获取所有的View
             deleteChildFiles(v);
-        }else {
+        } else {
             //目前是未打开状态，再次点击时打开directory，然后显示其子孩子
             ((DirectoryTextView) v).isOpened = true;
             ((DirectoryTextView) v).setPaint_color(TreeFragment.DIRECTORY_OPENED_COLOR);
@@ -56,30 +56,30 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
         }
 
     }
-    public void showChildFiles(View parent){
-        File[] files = FilePathUtil.getFileList(new File(((DirectoryTextView)parent).getCurrentPath()));
-        if (files == null){
-            return ;
+
+    public void showChildFiles(View parent) {
+        File[] files = FilePathUtil.getFileList(new File(((DirectoryTextView) parent).getCurrentPath()));
+        if (files == null) {
+            return;
         }
-        for (File f : files){
-            Log.d("Debug",f.getPath());
-            if (f.isFile()){
-                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(),f.getPath());
-                Log.d("Debug","File:"+stages);
-                ftv = new FileTextView(fragment.getContext(),null,stages);
+        for (File f : files) {
+            Log.d("Debug", f.getPath());
+            if (f.isFile()) {
+                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(), f.getPath());
+                Log.d("Debug", "File:" + stages);
+                ftv = new FileTextView(fragment.getContext(), null, stages);
                 ftv.setLayoutParams(params_ftv);
                 ftv.setCurrentPath(f.getPath());
                 ftv.append(f.getName());
-                ((LinearLayout)parent.getParent()).addView(ftv);
+                ((LinearLayout) parent.getParent()).addView(ftv);
                 file_listener = new OnFileItemClicked(fragment.getContext());
                 ftv.setOnClickListener(file_listener);
-            }
-            else {
+            } else {
                 ll = new LinearLayout(fragment.getContext());
                 ll.setOrientation(LinearLayout.VERTICAL);
-                ((LinearLayout)parent.getParent()).addView(ll);
-                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(),f.getPath());
-                dtv = new DirectoryTextView(fragment.getContext(),null,TreeFragment.DIRECTORY_UNOPENED_COLOR,Color.BLACK,false,stages);
+                ((LinearLayout) parent.getParent()).addView(ll);
+                int stages = FilePathUtil.getNumberOfFlow(TreeFragment.getStr_root_item_path(), f.getPath());
+                dtv = new DirectoryTextView(fragment.getContext(), null, TreeFragment.DIRECTORY_UNOPENED_COLOR, Color.BLACK, false, stages);
                 dtv.append(f.getName());
                 dtv.setCurrentPath(f.getPath());
                 dtv.setOnClickListener(this);
@@ -88,9 +88,9 @@ public class OnDirectoryItemClicked implements View.OnClickListener {
         }
     }
 
-    private void deleteChildFiles(View clicked_view){
+    private void deleteChildFiles(View clicked_view) {
         ViewGroup parent_view = (ViewGroup) clicked_view.getParent();
-        for (int i = 1;i < parent_view.getChildCount();i++){
+        for (int i = 1; i < parent_view.getChildCount(); i++) {
             parent_view.removeViewAt(i);
             i--;
         }

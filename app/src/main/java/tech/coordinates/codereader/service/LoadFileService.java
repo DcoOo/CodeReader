@@ -21,6 +21,7 @@ public class LoadFileService extends Service {
 
 
     private LoadFileBinder load_file = new LoadFileBinder();
+
     public LoadFileService() {
     }
 
@@ -29,24 +30,25 @@ public class LoadFileService extends Service {
         return load_file;
     }
 
-    public class LoadFileBinder extends Binder{
-        Service getService(){
+    public class LoadFileBinder extends Binder {
+        Service getService() {
             return LoadFileService.this;
         }
     }
+
     /**
      * 传过来所要加载的文件夹路径
      * 其中判断属于文件还是文件夹在MainActivity中进行
      * 如果是文件夹，返回一个List保存着该目录下的文件路径
      */
-    public List<String> getChildFiles(String directory_path){
+    public List<String> getChildFiles(String directory_path) {
         List<String> list_sub_files = new LinkedList<>();
         File dir_file = new File(directory_path);
-        if (!dir_file.exists()){
+        if (!dir_file.exists()) {
             try {
                 throw new FileNotFoundException();
             } catch (FileNotFoundException e) {
-                Log.d("exception",directory_path+":NOT EXISTS");
+                Log.d("exception", directory_path + ":NOT EXISTS");
                 list_sub_files.add(FILE_NOT_FOUND);
                 return list_sub_files;
             }
@@ -57,12 +59,12 @@ public class LoadFileService extends Service {
          * 只需要路径就够了，具体的打开文件操作由OpenFileService完成
          */
         File[] files_name = dir_file.listFiles(new FileNameFilter());
-        if (files_name.length == 0){
+        if (files_name.length == 0) {
             list_sub_files.add(WITHOUT_CHILD_FILES);
             return list_sub_files;
         }
         list_sub_files.add(WITH_CHILD_FILES);
-        for (File f : files_name){
+        for (File f : files_name) {
             list_sub_files.add(f.getPath());
         }
         return list_sub_files;

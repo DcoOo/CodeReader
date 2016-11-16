@@ -52,18 +52,20 @@ public class DialogLoadFileListener implements DialogInterface.OnClickListener {
     }
 
     private static String str_item_name = "";
-    public DialogLoadFileListener(Activity activity){
+
+    public DialogLoadFileListener(Activity activity) {
         this.activity_setting = activity;
     }
+
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-        if (str_item_name.equals("") || str_item_name == null || str_item_path.equals("") || str_item_path == null){
-            Toast.makeText(activity_setting,"找不到指定的文件",Toast.LENGTH_LONG).show();
-            return ;
+        if (str_item_name.equals("") || str_item_name == null || str_item_path.equals("") || str_item_path == null) {
+            Toast.makeText(activity_setting, "找不到指定的文件", Toast.LENGTH_LONG).show();
+            return;
         }
         Intent intent = new Intent(activity_setting, ReadActivity.class);
-        intent.putExtra(STR_ITEM_NAME,str_item_name);
-        intent.putExtra(STR_ITEM_PATH,str_item_path);
+        intent.putExtra(STR_ITEM_NAME, str_item_name);
+        intent.putExtra(STR_ITEM_PATH, str_item_path);
         activity_setting.startActivity(intent);
     }
 

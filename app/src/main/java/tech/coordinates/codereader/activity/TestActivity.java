@@ -41,7 +41,7 @@ import tech.coordinates.codereader.view.DirectoryTextView;
 /**
  * Created by Administrator on 2016/9/18.
  */
-public class TestActivity extends AppCompatActivity implements View.OnClickListener{
+public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout ll_main;
     private DirectoryTextView dtv;
@@ -58,16 +58,16 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        showChildDirectry(v,"child1");
-        showChildDirectry(v,"child2");
+        showChildDirectry(v, "child1");
+        showChildDirectry(v, "child2");
     }
 
-    public void showChildDirectry(View parent,String name){
+    public void showChildDirectry(View parent, String name) {
         ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
-        ((LinearLayout)parent.getParent()).addView(ll);
-        dtv = new DirectoryTextView(this,null);
-        dtv.setText("    "+name);
+        ((LinearLayout) parent.getParent()).addView(ll);
+        dtv = new DirectoryTextView(this, null);
+        dtv.setText("    " + name);
         dtv.setOnClickListener(this);
         ll.addView(dtv);
     }

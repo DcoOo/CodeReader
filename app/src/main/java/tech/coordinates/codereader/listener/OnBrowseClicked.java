@@ -22,13 +22,14 @@ public class OnBrowseClicked implements View.OnClickListener {
     private SimpleAdapter adapter;
     public static AlertDialog alertDialog;
 
-    public OnBrowseClicked(Context context){
+    public OnBrowseClicked(Context context) {
         this.activity_setting = context;
         adapter = new ShowFilesSimpleAdapter(activity_setting, FilePathUtil.getTargetDir("/"));
     }
+
     @Override
     public void onClick(View v) {
-        View view = ((Activity)activity_setting).getLayoutInflater().inflate(R.layout.dialog_show_files,null);
+        View view = ((Activity) activity_setting).getLayoutInflater().inflate(R.layout.dialog_show_files, null);
         lv_show_files = (ListView) view.findViewById(R.id.lv_show_files);
         lv_show_files.setAdapter(adapter);
         AlertDialog.Builder builder = new AlertDialog.Builder(activity_setting);
@@ -39,7 +40,7 @@ public class OnBrowseClicked implements View.OnClickListener {
             }
         });
         alertDialog = builder.show();
-        lv_show_files.setOnItemClickListener(new ListViewFilesOnClickListener(activity_setting,alertDialog,lv_show_files));
+        lv_show_files.setOnItemClickListener(new ListViewFilesOnClickListener(activity_setting, alertDialog, lv_show_files));
         ((Activity) activity_setting).registerForContextMenu(lv_show_files);
     }
 

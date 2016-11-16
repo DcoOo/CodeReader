@@ -14,17 +14,18 @@ public class FileStructure {
     private ArrayList<Row> row_array_list = new ArrayList<>();
     private LinkedList<String> row_link_list;
 
-    public FileStructure(){
+    public FileStructure() {
 
     }
-    public FileStructure(LinkedList<String> row_link_list){
+
+    public FileStructure(LinkedList<String> row_link_list) {
         this.row_link_list = row_link_list;
         init();
     }
 
-    private void init(){
+    private void init() {
         Row row;
-        for (String s : row_link_list){
+        for (String s : row_link_list) {
             row = new Row(s);
             row_array_list.add(row);
         }

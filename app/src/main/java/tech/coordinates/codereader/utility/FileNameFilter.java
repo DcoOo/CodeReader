@@ -18,9 +18,8 @@ public class FileNameFilter implements FilenameFilter {
     Pattern pattern = Pattern.compile(Str_Regex);
 
     /**
-     *
      * @param file file
-     * @param s file path
+     * @param s    file path
      * @return isAccept
      */
     @Override

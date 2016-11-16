@@ -10,13 +10,13 @@ public class Word {
     private int property = 999;
     private LinkedList<Character> word_content;
 
-    public Word(){
+    public Word() {
 
     }
 
-    public Word(String word){
+    public Word(String word) {
         word_content = new LinkedList<>();
-        for (byte c : word.getBytes()){
+        for (byte c : word.getBytes()) {
             word_content.add((char) c);
         }
     }
@@ -41,7 +41,7 @@ public class Word {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Character c : word_content){
+        for (Character c : word_content) {
             builder.append(c);
         }
         return builder.toString();

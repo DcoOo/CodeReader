@@ -9,16 +9,15 @@ import android.widget.TextView;
 
 /**
  * Created by Administrator on 2016/9/13.
- *
  */
 public class FileTextView extends TextView {
     /**
-     *默认画布颜色和画笔填充颜色
+     * 默认画布颜色和画笔填充颜色
      */
     private static final int DEFAULT_CANVAS_COLOR = Color.WHITE;
     private static final int DEFAULT_PAINT_COLOR = Color.BLUE;
     /**
-     *默认半径大小,最好根据当前TextSize的大小来决定
+     * 默认半径大小,最好根据当前TextSize的大小来决定
      */
     private Paint paint;
     private Canvas canvas;
@@ -31,12 +30,12 @@ public class FileTextView extends TextView {
      */
     private int stages;
     /**
-     *当前TextView的坐标
+     * 当前TextView的坐标
      */
     private float tv_posX;
     private float tv_posY;
     /**
-     *TextView左边圆半径,根据TextSize来决定
+     * TextView左边圆半径,根据TextSize来决定
      */
     private float radius;
 
@@ -45,16 +44,16 @@ public class FileTextView extends TextView {
     }
 
     /**
-     *current_path用于保存当前路径，便于找到子目录或者打开文件
+     * current_path用于保存当前路径，便于找到子目录或者打开文件
      */
     private String currentPath = "";
 
-    public FileTextView(Context context, AttributeSet attrs,int stages){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,stages);
+    public FileTextView(Context context, AttributeSet attrs, int stages) {
+        this(context, attrs, DEFAULT_CANVAS_COLOR, DEFAULT_PAINT_COLOR, stages);
     }
 
-    public FileTextView(Context context, AttributeSet attrs, int fill_color,int stages) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,stages);
+    public FileTextView(Context context, AttributeSet attrs, int fill_color, int stages) {
+        this(context, attrs, fill_color, DEFAULT_PAINT_COLOR, stages);
     }
 
     public String getCurrentPath() {
@@ -66,9 +65,9 @@ public class FileTextView extends TextView {
     }
 
     public FileTextView(Context context, AttributeSet attrs, int fill_color, int paint_color, int stages) {
-        super(context,attrs);
+        super(context, attrs);
         String str_def = "";
-        for (int i = 0;i < 4+4*stages;i++){
+        for (int i = 0; i < 4 + 4 * stages; i++) {
             str_def += " ";
         }
         this.setText(str_def);
@@ -95,8 +94,8 @@ public class FileTextView extends TextView {
         paint.setColor(paint_color);
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
-        this.radius = (float) (getTextSize()*0.3);
-        canvas.drawCircle(tv_posX+2*radius+3*stages*radius,tv_posY+2*radius,radius,paint);
+        this.radius = (float) (getTextSize() * 0.3);
+        canvas.drawCircle(tv_posX + 2 * radius + 3 * stages * radius, tv_posY + 2 * radius, radius, paint);
 
     }
 

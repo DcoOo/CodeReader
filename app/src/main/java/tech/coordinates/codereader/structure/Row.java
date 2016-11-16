@@ -15,15 +15,16 @@ public class Row {
     private int rowProperty = RowProperty.ROW_PROPERTY_COMMON;
     private String row_cont;
 
-    public Row(String row_content){
+    public Row(String row_content) {
         list_row_content = new LinkedList<>();
         this.row_cont = row_content;
-        for (byte b : row_content.getBytes()){
-            list_row_content.add((char)b);
+        for (byte b : row_content.getBytes()) {
+            list_row_content.add((char) b);
         }
         ContentUtility.setRowProperty(this);
         ContentUtility.spliteWords(this);
     }
+
     public void setList_row_content(LinkedList<Character> list_row_content) {
         this.list_row_content = list_row_content;
     }
@@ -55,8 +56,8 @@ public class Row {
     @Override
     public String toString() {
         String content = "";
-        for (Character c : list_row_content){
-            content += c+"";
+        for (Character c : list_row_content) {
+            content += c + "";
         }
         return content;
     }

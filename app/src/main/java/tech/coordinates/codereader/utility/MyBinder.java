@@ -9,11 +9,11 @@ import android.os.Binder;
 public class MyBinder extends Binder {
     private Service service;
 
-    protected MyBinder(Service service){
+    protected MyBinder(Service service) {
         this.service = service;
     }
 
-    public Service getService(){
+    public Service getService() {
         return service;
     }
 }

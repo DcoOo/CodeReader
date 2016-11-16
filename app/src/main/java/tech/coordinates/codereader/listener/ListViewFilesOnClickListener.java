@@ -44,21 +44,22 @@ public class ListViewFilesOnClickListener implements AdapterView.OnItemClickList
     private String last_click_path = "";
     private TextView tv_dialog_back;
 
-    public ListViewFilesOnClickListener(Context context, AlertDialog dialog, ListView lv){
+    public ListViewFilesOnClickListener(Context context, AlertDialog dialog, ListView lv) {
         this.context = context;
         this.dialog = dialog;
         this.lv = lv;
         tv_dialog_back = (TextView) dialog.findViewById(R.id.tv_dialog_show_files_back);
-        ((Activity)context).registerForContextMenu(lv);
+        ((Activity) context).registerForContextMenu(lv);
         tv_dialog_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!last_click_path.equals("")){
+                if (!last_click_path.equals("")) {
                     refleshFilesListView(last_click_path);
                 }
             }
         });
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         tv_name = (TextView) view.findViewById(R.id.tv_item_name);
@@ -69,15 +70,15 @@ public class ListViewFilesOnClickListener implements AdapterView.OnItemClickList
         boo_isFile = tv_isFile.getText().toString().equals(DialogLoadFileListener.FILE);
 
         //如果点击的是文件
-        if (boo_isFile){
-            onClickFile(str_name,str_path);
-        }else {
+        if (boo_isFile) {
+            onClickFile(str_name, str_path);
+        } else {
             //点击目录
-            onClickDirectory(str_name,str_path);
+            onClickDirectory(str_name, str_path);
         }
     }
 
-    private void onClickFile(String name,String path){
+    private void onClickFile(String name, String path) {
         et_path = TVLoadFileListener.getEt_path();
         et_path.setText(path);
         //将数据传到DialogLoadFileListener中
@@ -86,17 +87,17 @@ public class ListViewFilesOnClickListener implements AdapterView.OnItemClickList
         dialog.dismiss();
     }
 
-    private void onClickDirectory(String name,String path){
+    private void onClickDirectory(String name, String path) {
         last_click_path = new File(path).getParent();
-        Log.d("Debug","back"+last_click_path);
+        Log.d("Debug", "back" + last_click_path);
         //刷新界面，进入到下一级目录
-        if (FilePathUtil.getTargetDir(path) != null){
+        if (FilePathUtil.getTargetDir(path) != null) {
             refleshFilesListView(path);
         }
 
     }
 
-    private void refleshFilesListView(String path){
+    private void refleshFilesListView(String path) {
         adapter = new ShowFilesSimpleAdapter(context, FilePathUtil.getTargetDir(path));
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);

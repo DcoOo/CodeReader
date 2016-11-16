@@ -16,12 +16,19 @@ public abstract class WordProperty {
 
     public static final int CUSTOM_VARIABLE_NAME = 8;
     public static final int CUSTOM_FUNCTION_NAME = 9;
-    public static final int CUSTOM_CLASS_NAME = 10;
+    public static final int TYPE_NAME = 10;
     public static final int RETURN_TYPE = 11;
     public static final int INTERFACE_NAME = 12;
 
     public static final int PACKAGE_NAME = 13;
     public static final int IMPORT_PACKAGE_NAME = 14;
     public static final int EXPLAIN = 15;
+    public static final int DEFINE_NEW = 16;
+    public static final int OPERATOR_ASSIGNMENT = 17;
+    public static final int IF_CONDITION = 18;
+    public static final int WHILE_CONDITION = 19;
+    public static final int SWITCH_SELECT = 20;
 
+    public static final int UNDEFINE = 21;
 }
+

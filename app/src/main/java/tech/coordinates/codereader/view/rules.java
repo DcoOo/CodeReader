@@ -33,19 +33,21 @@ public class Rules extends View {
     }
 
     public Rules(Context context, AttributeSet attrs) {
-        this(context,attrs,Color.BLACK);
+        this(context, attrs, Color.BLACK);
     }
-    public Rules(Context context, AttributeSet attrs, int color){
-        super(context,attrs);
+
+    public Rules(Context context, AttributeSet attrs, int color) {
+        super(context, attrs);
         this.x = this.getPivotX();
         this.y = this.getPivotY();
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MyRules);
         //设置默认值
-        color = ta.getColor(R.styleable.MyRules_rules_color,Color.BLACK);
+        color = ta.getColor(R.styleable.MyRules_rules_color, Color.BLACK);
         ta.recycle();
         setColor(color);
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -54,11 +56,11 @@ public class Rules extends View {
         paint.setAntiAlias(true);
         paint.setColor(color);
         paint.setStrokeWidth(100);
-        canvas.drawCircle(x,y,3000,paint);
+        canvas.drawCircle(x, y, 3000, paint);
 //        drawRules(paint);
     }
 
-    private void drawRules(Paint paint){
-        Log.d("Debug","X:"+x+"Y:"+y+"Screen:"+screen_width);
+    private void drawRules(Paint paint) {
+        Log.d("Debug", "X:" + x + "Y:" + y + "Screen:" + screen_width);
     }
 }

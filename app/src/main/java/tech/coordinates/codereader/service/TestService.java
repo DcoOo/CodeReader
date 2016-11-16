@@ -32,30 +32,31 @@ public class TestService extends Service {
         return testBinder;
     }
 
-    public class TestBinder extends Binder{
+    public class TestBinder extends Binder {
 
         //        protected OpenFileBinder(Service service) {
 //            super(service);
 //        }
-        public Service getService(){
+        public Service getService() {
             return TestService.this;
         }
     }
 
     /**
      * 使用NIO来读取
+     *
      * @param file_path 需要读取的文件路径
      * @return 一个String数组，长度为2，String[0]:状态码 String[1]:文件内容
      * @throws IOException
      */
-    public String[] getFileContent(String file_path){
+    public String[] getFileContent(String file_path) {
         String[] content = new String[2];
         random_file_read = null;
         StringBuilder str_builder = new StringBuilder("");
         try {
-            random_file_read = new RandomAccessFile(file_path,"r");
+            random_file_read = new RandomAccessFile(file_path, "r");
         } catch (FileNotFoundException e) {
-            Log.d("exception",file_path+":NOT EXISTS");
+            Log.d("exception", file_path + ":NOT EXISTS");
             content[0] = OPEN_FILE_FAILED;
             content[1] = null;
             return content;

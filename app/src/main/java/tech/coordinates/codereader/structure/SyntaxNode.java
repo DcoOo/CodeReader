@@ -14,7 +14,7 @@ public class SyntaxNode {
     private int tag;
     private String name;
 
-    public SyntaxNode(){
+    public SyntaxNode() {
 
     }
 

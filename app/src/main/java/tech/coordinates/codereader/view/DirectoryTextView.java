@@ -13,12 +13,12 @@ import android.widget.TextView;
  */
 public class DirectoryTextView extends TextView {
     /**
-     *默认画布颜色和画笔填充颜色
+     * 默认画布颜色和画笔填充颜色
      */
     private static final int DEFAULT_CANVAS_COLOR = Color.WHITE;
     private static final int DEFAULT_PAINT_COLOR = Color.RED;
     /**
-     *默认半径大小,最好根据当前TextSize的大小来决定
+     * 默认半径大小,最好根据当前TextSize的大小来决定
      */
     private static final float DEFAULT_RADIUS = 10;
 
@@ -28,33 +28,33 @@ public class DirectoryTextView extends TextView {
     private int fill_color;
     private int paint_color;
     /**
-     *当前TextView的坐标
+     * 当前TextView的坐标
      */
     private int stages;
     private float tv_posX;
     private float tv_posY;
     /**
-     *TextView左边圆半径,根据TextSize来决定
+     * TextView左边圆半径,根据TextSize来决定
      */
     private float radius;
 
     /**
-     *目录文件是否被打开
+     * 目录文件是否被打开
      */
     public boolean isOpened;
 
     /**
-     *current_path用于保存当前路径，便于找到子目录或者打开文件
+     * current_path用于保存当前路径，便于找到子目录或者打开文件
      */
     private String currentPath = "";
 
 
-    public DirectoryTextView(Context context, AttributeSet attrs){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,false,0);
+    public DirectoryTextView(Context context, AttributeSet attrs) {
+        this(context, attrs, DEFAULT_CANVAS_COLOR, DEFAULT_PAINT_COLOR, false, 0);
     }
 
-    public DirectoryTextView(Context context, AttributeSet attrs,boolean isOpened){
-        this(context,attrs,DEFAULT_CANVAS_COLOR,DEFAULT_PAINT_COLOR,isOpened,0);
+    public DirectoryTextView(Context context, AttributeSet attrs, boolean isOpened) {
+        this(context, attrs, DEFAULT_CANVAS_COLOR, DEFAULT_PAINT_COLOR, isOpened, 0);
     }
 
     public void setCurrentPath(String currentPath) {
@@ -67,15 +67,14 @@ public class DirectoryTextView extends TextView {
     }
 
     public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, boolean isOpened) {
-        this(context,attrs,fill_color,DEFAULT_PAINT_COLOR,isOpened,0);
+        this(context, attrs, fill_color, DEFAULT_PAINT_COLOR, isOpened, 0);
     }
 
 
-
-    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, int paint_color,boolean isOpened,int stages) {
-        super(context,attrs);
+    public DirectoryTextView(Context context, AttributeSet attrs, int fill_color, int paint_color, boolean isOpened, int stages) {
+        super(context, attrs);
         String str_def = "";
-        for(int i = 0;i < 4+4*stages;i++){
+        for (int i = 0; i < 4 + 4 * stages; i++) {
             str_def += " ";
         }
         this.fill_color = fill_color;
@@ -114,8 +113,8 @@ public class DirectoryTextView extends TextView {
         /**
          * 设置左边圆圈的位置
          */
-        this.radius = (float) (getTextSize()*0.3);
-        canvas.drawCircle(tv_posX+2*radius+stages*radius*3,tv_posY+2*radius, radius,paint);
+        this.radius = (float) (getTextSize() * 0.3);
+        canvas.drawCircle(tv_posX + 2 * radius + stages * radius * 3, tv_posY + 2 * radius, radius, paint);
     }
 
     public int getFill_color() {

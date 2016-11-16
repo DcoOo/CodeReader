@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.menu_item_setting:
                 //点击设置时，切换到SettingActivity
-                Intent i = new Intent(MainActivity.this,SettingActivity.class);
+                Intent i = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(i);
                 break;
             default:
