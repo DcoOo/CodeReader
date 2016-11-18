@@ -60,7 +60,7 @@ public class DialogLoadFileListener implements DialogInterface.OnClickListener {
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         if (str_item_name.equals("") || str_item_name == null || str_item_path.equals("") || str_item_path == null) {
-            Toast.makeText(activity_setting, "找不到指定的文件", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity_setting, "Cannot find file", Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(activity_setting, ReadActivity.class);

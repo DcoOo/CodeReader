@@ -8,6 +8,8 @@ import java.util.LinkedList;
 public class Word {
     //记录词性
     private int property = 999;
+    private int start = -1;
+    private int end = -1;
     private LinkedList<Character> word_content;
 
     public Word() {

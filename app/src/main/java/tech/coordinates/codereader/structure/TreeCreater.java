@@ -66,6 +66,7 @@ public class TreeCreater {
     private SyntaxNode if_condition;
     private SyntaxNode while_condition;
     private SyntaxNode switch_select;
+    private SyntaxNode for_condition;
 
     private SyntaxNode undefine;
 
@@ -158,6 +159,8 @@ public class TreeCreater {
                 routine_control_return.getChildNode().add(n);
             }
         }
+        //for
+        routine_control_for.getChildNode().add(for_condition);
         //if
         routine_control_if.getChildNode().add(if_condition);
         //else
@@ -516,5 +519,10 @@ public class TreeCreater {
         undefine.setCouldEnd(false);
         undefine.setTag(WordProperty.UNDEFINE);
         all_nodes.add(undefine);
+        for_condition = new SyntaxNode();
+        for_condition.setCouldStart(false);
+        for_condition.setCouldEnd(true);
+        for_condition.setTag(WordProperty.FOR_CONDITION);
+        all_nodes.add(for_condition);
     }
 }

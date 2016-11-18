@@ -1,5 +1,8 @@
 package tech.coordinates.codereader.structure;
 
+import android.text.SpannableString;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -13,7 +16,36 @@ public class Row {
     private LinkedList<Character> list_row_content;
     private LinkedList<Word> list_words;
     private int rowProperty = RowProperty.ROW_PROPERTY_COMMON;
+    private LinkedList<HashMap<String,Integer>> words_info;
     private String row_cont;
+
+    public SpannableString getSpan_str() {
+        return span_str;
+    }
+
+    public void setSpan_str(SpannableString span_str) {
+
+        this.span_str = span_str;
+    }
+
+    private SpannableString span_str;
+
+    public void setWords_info(LinkedList<HashMap<String, Integer>> words_info) {
+        this.words_info = words_info;
+    }
+
+    public void setRow_cont(String row_cont) {
+        this.row_cont = row_cont;
+    }
+
+
+    public String getRow_cont() {
+        return row_cont;
+    }
+
+    public LinkedList<HashMap<String, Integer>> getWords_info() {
+        return words_info;
+    }
 
     public Row(String row_content) {
         list_row_content = new LinkedList<>();
@@ -23,6 +55,9 @@ public class Row {
         }
         ContentUtility.setRowProperty(this);
         ContentUtility.spliteWords(this);
+
+        words_info = new LinkedList<>();
+
     }
 
     public void setList_row_content(LinkedList<Character> list_row_content) {

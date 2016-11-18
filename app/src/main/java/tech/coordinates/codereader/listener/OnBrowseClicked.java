@@ -33,7 +33,7 @@ public class OnBrowseClicked implements View.OnClickListener {
         lv_show_files = (ListView) view.findViewById(R.id.lv_show_files);
         lv_show_files.setAdapter(adapter);
         AlertDialog.Builder builder = new AlertDialog.Builder(activity_setting);
-        builder.setTitle("选择目录或文件").setView(view).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setTitle("Select File Or Directory").setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //nothing

@@ -30,5 +30,7 @@ public abstract class WordProperty {
     public static final int SWITCH_SELECT = 20;
 
     public static final int UNDEFINE = 21;
+
+    public static final int FOR_CONDITION = 22;
 }
 

@@ -63,7 +63,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuItem menuItem1 = menu.add(1, 1, 1, "选择该文件夹");
+        MenuItem menuItem1 = menu.add(1, 1, 1, "Select this file");
         menuItem1.setOnMenuItemClickListener(new MyOnMenuItemSelected());
 
     }

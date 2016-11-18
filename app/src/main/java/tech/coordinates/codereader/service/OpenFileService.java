@@ -67,7 +67,8 @@ public class OpenFileService extends Service {
          */
         LinkedList<String> content = new LinkedList<>();
         File f = new File(file_path);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        String encoding = EncodeManager.getFileEncoding(file_path);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f),encoding));
         String line;
         while ((line = reader.readLine()) != null) {
             content.add(line);
